@@ -1,7 +1,9 @@
 package de.oul.gamejam;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import de.oul.gamejam.entity.PlayerFactory;
@@ -28,6 +30,8 @@ public class FirstScreen implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		engine.update(delta);
 	}
 
