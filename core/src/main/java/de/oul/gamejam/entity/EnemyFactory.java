@@ -23,9 +23,9 @@ public class EnemyFactory {
         this.engine = engine;
         this.world = world;
 
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Hero1.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Enemy1.png")));
     }
-    public Entity createEnemy(float x, float y) {
+    public Entity createEnemy(int x, int y) {
         Entity enemy = engine.createEntity();
 
         // Give the enemy a position.
@@ -49,6 +49,10 @@ public class EnemyFactory {
 
         VelocityComponent velocityComponent = engine.createComponent(VelocityComponent.class);
         enemy.add(velocityComponent);
+
+        // make it possible to shoot
+        ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
+        enemy.add(shootingComponent);
 
         // Add the enemy to the engine.
         engine.addEntity(enemy);

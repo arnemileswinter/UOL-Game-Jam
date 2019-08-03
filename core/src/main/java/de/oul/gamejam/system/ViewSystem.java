@@ -7,14 +7,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import de.oul.gamejam.View;
-import de.oul.gamejam.component.PlayerComponment;
+import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.TextureComponent;
 import de.oul.gamejam.component.ViewComponent;
 
 public class ViewSystem extends IteratingSystem {
     public ViewSystem() {
-        super(Family.all(PositionComponent.class, PlayerComponment.class).get());
+        super(Family.all(PositionComponent.class, PlayerComponent.class).get());
     }
 
     @Override

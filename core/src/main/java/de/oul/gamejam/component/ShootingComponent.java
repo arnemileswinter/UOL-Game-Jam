@@ -8,6 +8,7 @@ public class ShootingComponent implements Component, Pool.Poolable {
   public float bulletSpeed = 1;
   public float shootSpeed = 1;
   public float timeSinceLastShot = 0;
+  public float bulletDamage = 1;
 
 
   /** Resets the object for reuse. Object references should be nulled and fields may be set to default values. */
@@ -17,5 +18,6 @@ public class ShootingComponent implements Component, Pool.Poolable {
     shootSpeed = 1f;
     timeSinceLastShot = 0f;
     bulletSpeed = 1f;
+    bulletDamage = 1;
   }
 }
