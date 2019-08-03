@@ -11,11 +11,11 @@ import de.oul.gamejam.component.PositionComponent;
  * the world is stepped.
  * @see PhysicsSystem
  */
-public class AlignPhysicsWithTransformSystem extends IteratingSystem {
+public class AlignPhysicsWithDataSystem extends IteratingSystem {
   /**
    * Instantiates a system that will iterate over the entities described by the Family.
    */
-  public AlignPhysicsWithTransformSystem(){
+  public AlignPhysicsWithDataSystem(){
     super(Family.all(PhysicsComponent.class, PositionComponent.class).get());
   }
 

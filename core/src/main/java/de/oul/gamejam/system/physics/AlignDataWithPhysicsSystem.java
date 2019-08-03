@@ -11,11 +11,11 @@ import de.oul.gamejam.component.PositionComponent;
  * Should be invoked before the stepping the physics world.
  * @see PhysicsSystem
  */
-public class AlignTransformWithPhysicsSystem extends IteratingSystem {
+public class AlignDataWithPhysicsSystem extends IteratingSystem {
   /**
    * Instantiates a system that will iterate over the entities described by the Family.
    */
-  public AlignTransformWithPhysicsSystem(){
+  public AlignDataWithPhysicsSystem(){
     super(Family.all(PhysicsComponent.class, PositionComponent.class).get());
   }
 
