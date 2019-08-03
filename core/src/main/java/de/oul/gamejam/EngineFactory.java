@@ -31,7 +31,7 @@ public class EngineFactory {
   }
 
   public PooledEngine createEngine() {
-    Camera camera = new OrthographicCamera(Gdx.graphics.getWidth() / PIXELS_PER_METER, Gdx.graphics.getHeight() / PIXELS_PER_METER);
+    Camera camera = new OrthographicCamera();
 
     PooledEngine pooledEngine = new PooledEngine();
 
