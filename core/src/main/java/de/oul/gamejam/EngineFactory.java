@@ -46,7 +46,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new InputSystem());
 
     // Enemy Systems
-    pooledEngine.addSystem(new EnemyDeathSystem());
+    pooledEngine.addSystem(new EnemyDeathSystem(scoreboard));
     pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
     pooledEngine.addSystem(new MoveEnemySystem());
 

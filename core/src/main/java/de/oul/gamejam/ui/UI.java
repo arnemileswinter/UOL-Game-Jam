@@ -12,7 +12,8 @@ public class UI extends Table {
     healthTable.add(new VisLabel("Health")).left();
     healthTable.row();
     healthTable.add(healthBar);
-    healthTable.add(new VisLabel("Killed enemys")).left();
+    healthTable.row();
+    healthTable.add(new ScoreLabel(scoreboard)).left();
     add(healthTable).width(Gdx.graphics.getWidth()/3).height(Gdx.graphics.getWidth()/8).grow().left().top();
   }
 }
