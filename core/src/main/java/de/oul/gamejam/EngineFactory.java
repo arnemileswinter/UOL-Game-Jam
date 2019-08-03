@@ -35,6 +35,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new RenderingSystem(camera));
 
     // add physics systems.
+    world.setContactListener(new EntityCollisionListener());
     pooledEngine.addSystem(new AlignPhysicsWithTransformSystem());
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignTransformWithPhysicsSystem());
