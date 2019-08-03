@@ -7,6 +7,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
+import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PlayerComponment;
 import de.oul.gamejam.component.PositionComponent;
@@ -15,6 +17,7 @@ import de.oul.gamejam.component.PositionComponent;
 public class InputSystem extends IteratingSystem implements InputProcessor {
     private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
 
+    boolean move = false;
 
     public InputSystem() {
         super(Family.all(PositionComponent.class, PlayerComponment.class).get());
@@ -28,6 +31,11 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        Entity player;
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class).get())){
+            player = entity;
+        }
+        //player.getComponent(PositionComponent.class)
         return false;
     }
 
@@ -65,5 +73,11 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    private void move(Entity entity, Vector2 velocity){
+        while(move){
+
+        }
     }
 }

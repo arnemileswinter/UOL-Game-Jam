@@ -5,18 +5,19 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PositionComponent;
+import de.oul.gamejam.component.VelocityComponent;
 
 /**
- * Applies the location of the transform component onto the physics body.
- * Should be invoked before the stepping the physics world.
+ * Applies the transformation of a physics body onto the transform after
+ * the world is stepped.
  * @see PhysicsSystem
  */
-public class AlignTransformWithPhysicsSystem extends IteratingSystem {
+public class AlignPhysicsWithDataSystem extends IteratingSystem {
   /**
    * Instantiates a system that will iterate over the entities described by the Family.
    */
-  public AlignTransformWithPhysicsSystem(){
-    super(Family.all(PhysicsComponent.class, PositionComponent.class).get());
+  public AlignPhysicsWithDataSystem(){
+    super(Family.all(PhysicsComponent.class).one(PositionComponent.class, VelocityComponent.class).get());
   }
 
   /**
@@ -31,6 +32,13 @@ public class AlignTransformWithPhysicsSystem extends IteratingSystem {
     PhysicsComponent physics = entity.getComponent(PhysicsComponent.class);
     PositionComponent position = entity.getComponent(PositionComponent.class);
 
-    physics.body.setTransform(position.vector, physics.body.getAngle());
+    if(position != null) {
+      position.vector.set(physics.body.getPosition());
+    }
+
+    VelocityComponent velocity = entity.getComponent(VelocityComponent.class);
+    if(velocity != null) {
+      velocity.vector.set(physics.body.getLinearVelocity());
+    }
   }
 }
