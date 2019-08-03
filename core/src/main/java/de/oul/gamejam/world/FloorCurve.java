@@ -1,10 +1,11 @@
 package de.oul.gamejam.world;
 
 import com.badlogic.ashley.core.PooledEngine;
+import de.oul.gamejam.entity.MapTileFactory;
 
 public class FloorCurve extends Room {
-    public FloorCurve(PooledEngine pooledEngine, int x, int y, int rotate) {
-        super(pooledEngine, x, y);
+    public FloorCurve(MapTileFactory mapTileFactory, int x, int y, int rotate) {
+        super(mapTileFactory, x, y);
         topDoor = false;
         rightDoor = true;
         leftDoor = false;

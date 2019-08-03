@@ -33,6 +33,7 @@ public class RenderingSystem extends IteratingSystem {
    */
   @Override
   public void update(float delta){
+    camera.update();
     spriteBatch.begin();
     spriteBatch.setProjectionMatrix(camera.combined);
     super.update(delta);

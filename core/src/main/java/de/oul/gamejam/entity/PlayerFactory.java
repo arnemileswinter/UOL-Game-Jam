@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import de.oul.gamejam.component.PhysicsComponent;
+import de.oul.gamejam.component.PlayerComponment;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.TextureComponent;
 
@@ -54,6 +55,10 @@ public class PlayerFactory {
     PhysicsComponent physics = engine.createComponent(PhysicsComponent.class);
     physics.body = this.getPlayerBody(x,y);
     player.add(physics);
+
+    // make it the player
+    PlayerComponment playerComponent = engine.createComponent(PlayerComponment.class);
+    player.add(playerComponent);
 
     // Add the player to the engine.
     engine.addEntity(player);

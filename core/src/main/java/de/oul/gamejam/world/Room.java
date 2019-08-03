@@ -1,14 +1,13 @@
 package de.oul.gamejam.world;
 
 import com.badlogic.ashley.core.PooledEngine;
-import de.oul.gamejam.entity.MapTitleFactory;
+import de.oul.gamejam.entity.MapTileFactory;
 
 public abstract class Room {
-    protected PooledEngine pooledEngine;
-    protected int titleSize = 32;
+    private final MapTileFactory mapTileFactory;
     private int roomPositionX;
     private int roomPositionY;
-    private int roomSize = 320;
+    private int roomSize = 10;
     protected boolean topDoor;
     protected boolean bottomDoor;
     protected boolean leftDoor;
@@ -29,18 +28,17 @@ public abstract class Room {
     protected boolean[] floorRight = {false, false,false,true, false,false,false,false,false,false};
     protected boolean[] floorRightVerticalBottom = {false,false,false,true,false,false,true,true,true,true};
 
-    public Room(PooledEngine pooledEngine, int x, int y){
-        this.pooledEngine = pooledEngine;
+    public Room(MapTileFactory mapTileFactory, int x, int y){
         this.roomPositionX = x;
         this.roomPositionY = y;
+        this.mapTileFactory = mapTileFactory;
     }
 
     public void createRoom(boolean[][]room){
-        MapTitleFactory mapTitleFactory = new MapTitleFactory(pooledEngine);
         for(int i = 0; i<10;i++){
             for(int j = 0; j<10;j++){
                 if(room[j][i]){
-                    mapTitleFactory.createWand(-160+i*titleSize + roomPositionX*roomSize,160-j*titleSize+ (-1*roomPositionY+9)*roomSize);
+                    mapTileFactory.createWall(i + roomPositionX*roomSize, -j + (-1*roomPositionY+9)*roomSize);
                 }
             }
         }
