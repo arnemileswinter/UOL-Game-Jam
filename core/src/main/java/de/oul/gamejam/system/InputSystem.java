@@ -7,17 +7,12 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import de.oul.gamejam.View;
 import de.oul.gamejam.component.*;
 
 
 public class InputSystem extends IteratingSystem implements InputProcessor {
-    private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
-
-    boolean move = false;
 
     public InputSystem() {
         super(Family.all(PositionComponent.class, PlayerComponent.class).get());
@@ -67,8 +62,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             shootingComponent.isShooting = true;
         }
 
-        move = true;
-        move(player);
         return false;
     }
 
@@ -130,7 +123,4 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         return false;
     }
 
-    private void move(Entity entity){
-
-    }
 }
