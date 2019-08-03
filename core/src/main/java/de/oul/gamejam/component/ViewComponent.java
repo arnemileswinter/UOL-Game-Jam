@@ -10,7 +10,7 @@ public class ViewComponent implements Component, Pool.Poolable {
 
     @Override
     public void reset() {
-
+        view = View.Up;
     }
 
     public void changeView(View view){
