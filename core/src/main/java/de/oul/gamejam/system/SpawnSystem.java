@@ -29,14 +29,13 @@ public class SpawnSystem extends IteratingSystem {
     }
 
     public void placeEnemysInWorld(){
+        EnemyFactory enemyFactory = new EnemyFactory(pooledEngine, world);
         int enemyCounter = 0;
         while(enemyCounter < 100){
             int xCoordinate = random.nextInt(100);
             int yCoordinate = random.nextInt(100);
-            Entity enemy = new EnemyFactory(pooledEngine, world).createEnemy(xCoordinate,yCoordinate);
+            enemyFactory.createEnemy(xCoordinate,yCoordinate);
             enemyCounter ++;
-            System.out.println(xCoordinate);
-            System.out.println(yCoordinate);
         }
 
     }
