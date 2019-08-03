@@ -25,7 +25,7 @@ public class EngineFactory {
    */
   private final World world;
 
-  public EngineFactory(World world){
+  public EngineFactory(World world, Scoreboard scoreboard){
     this.world = world;
   }
 
@@ -51,7 +51,7 @@ public class EngineFactory {
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
     pooledEngine.addSystem(new BulletHurtSystem());
-
+    pooledEngine.addSystem(new PowerupSystem());
 
     // add physics systems.
     world.setContactListener(new EntityCollisionListener());

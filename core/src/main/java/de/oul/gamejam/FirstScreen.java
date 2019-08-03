@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import de.oul.gamejam.entity.MapTileFactory;
 import de.oul.gamejam.entity.PlayerFactory;
+import de.oul.gamejam.entity.PowerupFactory;
+import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.world.LevelFactory;
 
 /** First screen of the application. Displayed after the application is created. */
@@ -20,12 +22,15 @@ public class FirstScreen implements Screen {
   @Override
   public void show(){
     World         world         = new World(new Vector2(0, 0), true);
-    EngineFactory engineFactory = new EngineFactory(world);
+    EngineFactory engineFactory = new EngineFactory(world, new Scoreboard());
     engine = engineFactory.createEngine();
     PlayerFactory playerFactory = new PlayerFactory(engine, world);
     playerFactory.createPlayer(5, 5);
     LevelFactory levelFactory = new LevelFactory(new MapTileFactory(engine, world));
     levelFactory.createLevel();
+    PowerupFactory powerupFactory = new PowerupFactory(engine, world, new RandomPowerUpEffectProvider(playerFactory));
+
+    powerupFactory.create(7, 5);
 
   }
 

@@ -39,27 +39,25 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
-            player = entity;
-        }
-        Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
-        ViewComponent view = player.getComponent(ViewComponent.class);
-        if(Input.Keys.W == keycode){
-            velocity.y += 1;
-            view.changeView(View.Up);
-        }else if(Input.Keys.D == keycode){
-            velocity.x += 1;
-            view.changeView(View.Right);
-        }else if(Input.Keys.S == keycode){
-            velocity.y += -1;
-            view.changeView(View.Down);
-        }else if(Input.Keys.A == keycode){
-            velocity.x += -1;
-            view.changeView(View.Left);
-        } else if (Input.Keys.ENTER == keycode) {
-            ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
-            shootingComponent.isShooting = true;
+        for(Entity player: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
+            Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
+            ViewComponent view = player.getComponent(ViewComponent.class);
+            if(Input.Keys.W == keycode){
+                velocity.y += 1;
+                view.changeView(View.Up);
+            }else if(Input.Keys.D == keycode){
+                velocity.x += 1;
+                view.changeView(View.Right);
+            }else if(Input.Keys.S == keycode){
+                velocity.y += -1;
+                view.changeView(View.Down);
+            }else if(Input.Keys.A == keycode){
+                velocity.x += -1;
+                view.changeView(View.Left);
+            } else if (Input.Keys.ENTER == keycode) {
+                ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
+                shootingComponent.isShooting = true;
+            }
         }
 
         return false;
