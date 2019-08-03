@@ -1,6 +1,7 @@
 package de.oul.gamejam;
 
 import com.badlogic.gdx.Game;
+import com.kotcrab.vis.ui.VisUI;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class JamGame extends Game {
@@ -9,6 +10,7 @@ public class JamGame extends Game {
 
 	@Override
 	public void create() {
+		VisUI.load();
 		setScreen(new FirstScreen());
 	}
 }
