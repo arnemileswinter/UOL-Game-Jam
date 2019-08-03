@@ -43,7 +43,7 @@ public class UISystem extends EntitySystem {
     for (Entity healthy : getEngine().getEntitiesFor(entitiesWithHealthBars)) {
       HealthComponent healthComponent = healthy.getComponent(HealthComponent.class);
       if (healthComponent.current == healthComponent.max) {
-        return;
+        continue;
       }
 
       PositionComponent positionComponent = pm.get(healthy);
@@ -55,7 +55,7 @@ public class UISystem extends EntitySystem {
 
       healthComponent.healthBar.setSize(JamGame.PIXELS_PER_METER * 1.5f, JamGame.PIXELS_PER_METER * 0.1f);
       healthComponent.healthBar.setPosition(projectionVector.x - (healthComponent.healthBar.getWidth() * 0.5f),
-                                            projectionVector.y);
+                                            projectionVector.y + (0.75f * JamGame.PIXELS_PER_METER));
       healthComponent.healthBar.draw(batch, 1);
     }
   }
