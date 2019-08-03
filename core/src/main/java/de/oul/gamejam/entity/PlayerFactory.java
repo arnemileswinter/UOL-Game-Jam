@@ -26,7 +26,7 @@ public class PlayerFactory {
     this.engine = engine;
     this.world = world;
 
-    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Enemy4.png")));
+    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Hero1.png")));
   }
 
   /**
@@ -57,6 +57,9 @@ public class PlayerFactory {
     PlayerComponment playerComponent = engine.createComponent(PlayerComponment.class);
     player.add(playerComponent);
 
+    VelocityComponent velocityComponent = engine.createComponent(VelocityComponent.class);
+    player.add(velocityComponent);
+
     // make it possible to shoot
     ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
     player.add(shootingComponent);
@@ -81,7 +84,7 @@ public class PlayerFactory {
 
     FixtureDef fixtureDef = new FixtureDef();
     CircleShape circleShape = new CircleShape();
-    circleShape.setRadius(1);
+    circleShape.setRadius(0.5f);
     fixtureDef.shape = circleShape;
 
     body.createFixture(fixtureDef);
