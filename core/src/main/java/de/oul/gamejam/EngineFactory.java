@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import de.oul.gamejam.entity.BulletFactory;
-import de.oul.gamejam.system.CameraFocusPlayerSystem;
-import de.oul.gamejam.system.InputSystem;
-import de.oul.gamejam.system.RenderingSystem;
-import de.oul.gamejam.system.ShootingSystem;
+import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
 import de.oul.gamejam.system.physics.PhysicsDebugRenderSystem;
@@ -52,6 +49,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
     pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
+    pooledEngine.addSystem(new ViewSystem());
 
     return pooledEngine;
   }

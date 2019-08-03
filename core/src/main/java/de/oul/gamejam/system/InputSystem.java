@@ -7,7 +7,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import de.oul.gamejam.View;
 import de.oul.gamejam.component.*;
 
 
@@ -25,9 +28,13 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     protected void processEntity(Entity entity, float v) {
         Vector2 position = entity.getComponent(PositionComponent.class).vector;
         Vector2 velocity = entity.getComponent(VelocityComponent.class).vector;
+
+
         float speed = entity.getComponent(VelocityComponent.class).speed;
         position.x += velocity.x*speed;
         position.y += velocity.y*speed;
+
+
 
     }
 
@@ -38,18 +45,23 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             player = entity;
         }
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
+        ViewComponent view = player.getComponent(ViewComponent.class);
         if(Input.Keys.W == keycode){
             velocity.y = 1;
             velocity.x = 0;
+            view.changeView(View.Up);
         }else if(Input.Keys.D == keycode){
             velocity.y = 0;
             velocity.x = 1;
+            view.changeView(View.Right);
         }else if(Input.Keys.S == keycode){
             velocity.y = -1;
             velocity.x = 0;
+            view.changeView(View.Down);
         }else if(Input.Keys.A == keycode){
             velocity.y = 0;
             velocity.x = -1;
+            view.changeView(View.Left);
         }
 
         move = true;
