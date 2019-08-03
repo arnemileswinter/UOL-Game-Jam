@@ -55,6 +55,10 @@ public class EnemyFactory {
         ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
         enemy.add(shootingComponent);
 
+        //give the enemy life
+        HealthComponent healthComponent = engine.createComponent(HealthComponent.class);
+        enemy.add(healthComponent);
+
         // Add the enemy to the engine.
         engine.addEntity(enemy);
         return enemy;
