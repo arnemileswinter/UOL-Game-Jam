@@ -42,8 +42,8 @@ public class RenderingSystem extends IteratingSystem {
    */
   @Override
   public void update(float delta){
-    camera.viewportHeight = Gdx.graphics.getHeight() / PIXELS_PER_METER;
-    camera.viewportWidth = Gdx.graphics.getWidth()  / PIXELS_PER_METER;
+    camera.viewportHeight = Gdx.graphics.getHeight() / 2f / PIXELS_PER_METER;
+    camera.viewportWidth = Gdx.graphics.getWidth() / 2f / PIXELS_PER_METER;
     camera.update();
     spriteBatch.begin();
     spriteBatch.setProjectionMatrix(camera.combined);

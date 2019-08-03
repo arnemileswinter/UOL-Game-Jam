@@ -1,5 +1,6 @@
 package de.oul.gamejam.system;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -13,14 +14,17 @@ import de.oul.gamejam.component.TextureComponent;
 import de.oul.gamejam.component.ViewComponent;
 
 public class ViewSystem extends IteratingSystem {
+    ComponentMapper<TextureComponent> tm = ComponentMapper.getFor(TextureComponent.class);
+    ComponentMapper<ViewComponent> vm = ComponentMapper.getFor(ViewComponent.class);
+
     public ViewSystem() {
-        super(Family.all(PositionComponent.class, PlayerComponent.class).get());
+        super(Family.all(PositionComponent.class,ViewComponent.class,TextureComponent.class).get());
     }
 
     @Override
     protected void processEntity(Entity entity, float v) {
-        View view = entity.getComponent(ViewComponent.class).view;
-        TextureRegion textureRegion = entity.getComponent(TextureComponent.class).textureRegion;
+        View view = vm.get(entity).view;
+        TextureRegion textureRegion = tm.get(entity).textureRegion;
         String assetString = entity.getComponent(ViewComponent.class).assetString;
         switch (view){
             case Up:

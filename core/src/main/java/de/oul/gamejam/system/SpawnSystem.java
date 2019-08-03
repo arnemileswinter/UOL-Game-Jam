@@ -31,7 +31,7 @@ public class SpawnSystem extends IteratingSystem {
     public void placeEnemysInWorld(){
         EnemyFactory enemyFactory = new EnemyFactory(pooledEngine, world);
         int enemyCounter = 0;
-        while(enemyCounter < 100){
+        while(enemyCounter <30){
             int xCoordinate = random.nextInt(100);
             int yCoordinate = random.nextInt(100);
             enemyFactory.createEnemy(xCoordinate,yCoordinate);

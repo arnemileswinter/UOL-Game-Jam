@@ -54,6 +54,7 @@ public class EnemyFactory {
 
         // make it possible to shoot
         ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
+        shootingComponent.isShooting=true;
         enemy.add(shootingComponent);
 
         //give the enemy life
@@ -62,7 +63,9 @@ public class EnemyFactory {
 
         //add View to Enemy
         ViewComponent viewComponent = engine.createComponent(ViewComponent.class);
+        viewComponent.assetString ="Robot";
         enemy.add(viewComponent);
+
 
         // Add the enemy to the engine.
         engine.addEntity(enemy);
