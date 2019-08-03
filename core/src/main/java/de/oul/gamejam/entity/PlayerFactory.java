@@ -54,7 +54,7 @@ public class PlayerFactory {
     player.add(physics);
 
     // make it the player
-    PlayerComponment playerComponent = engine.createComponent(PlayerComponment.class);
+    PlayerComponent playerComponent = engine.createComponent(PlayerComponent.class);
     player.add(playerComponent);
 
     VelocityComponent velocityComponent = engine.createComponent(VelocityComponent.class);

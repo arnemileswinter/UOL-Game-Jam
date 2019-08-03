@@ -17,7 +17,7 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     boolean move = false;
 
     public InputSystem() {
-        super(Family.all(PositionComponent.class, PlayerComponment.class).get());
+        super(Family.all(PositionComponent.class, PlayerComponent.class).get());
         Gdx.input.setInputProcessor(this);
     }
 
@@ -34,7 +34,7 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
             player = entity;
         }
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
@@ -60,7 +60,7 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
         Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
             player = entity;
         }
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
