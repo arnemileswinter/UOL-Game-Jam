@@ -8,10 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import de.oul.gamejam.component.PhysicsComponent;
-import de.oul.gamejam.component.PhysicsComponent;
-import de.oul.gamejam.component.PlayerComponment;
-import de.oul.gamejam.component.PositionComponent;
+import de.oul.gamejam.component.*;
 
 
 public class InputSystem extends IteratingSystem implements InputProcessor {
@@ -26,21 +23,49 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     protected void processEntity(Entity entity, float v) {
+        Vector2 position = entity.getComponent(PositionComponent.class).vector;
+        Vector2 velocity = entity.getComponent(VelocityComponent.class).vector;
+        float speed = entity.getComponent(VelocityComponent.class).speed;
+        position.x += velocity.x*speed;
+        position.y += velocity.y*speed;
 
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        Entity player;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class).get())){
+        Entity player = null;
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
             player = entity;
         }
-        //player.getComponent(PositionComponent.class)
+        Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
+        if(Input.Keys.W == keycode){
+            velocity.y = 1;
+            velocity.x = 0;
+        }else if(Input.Keys.D == keycode){
+            velocity.y = 0;
+            velocity.x = 1;
+        }else if(Input.Keys.S == keycode){
+            velocity.y = -1;
+            velocity.x = 0;
+        }else if(Input.Keys.A == keycode){
+            velocity.y = 0;
+            velocity.x = -1;
+        }
+
+        move = true;
+        move(player);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        Entity player = null;
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
+            player = entity;
+        }
+        Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
+        velocity.x =0;
+        velocity.y =0;
         return false;
     }
 
@@ -75,9 +100,7 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         return false;
     }
 
-    private void move(Entity entity, Vector2 velocity){
-        while(move){
+    private void move(Entity entity){
 
-        }
     }
 }
