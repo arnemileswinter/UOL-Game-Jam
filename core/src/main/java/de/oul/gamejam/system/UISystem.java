@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.oul.gamejam.JamGame;
 import de.oul.gamejam.component.HealthComponent;
+import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.component.PositionComponent;
 
 public class UISystem extends EntitySystem {
@@ -25,7 +26,7 @@ public class UISystem extends EntitySystem {
   public UISystem(Stage stage, Camera worldCamera){
     this.stage = stage;
     this.worldCamera = worldCamera;
-    this.entitiesWithHealthBars = Family.all(HealthComponent.class, PositionComponent.class).get();
+    this.entitiesWithHealthBars = Family.all(HealthComponent.class, PositionComponent.class).exclude(PlayerComponent.class).get();
   }
 
   @Override
