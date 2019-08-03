@@ -49,7 +49,7 @@ public class EngineFactory {
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
     pooledEngine.addSystem(new BulletHurtSystem());
-
+    pooledEngine.addSystem(new EnemyDeathSystem());
     pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
 
     // add physics systems.
