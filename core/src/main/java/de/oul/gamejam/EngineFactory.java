@@ -47,6 +47,7 @@ public class EngineFactory {
 
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
+    pooledEngine.addSystem(new BulletHurtSystem());
 
     // add physics systems.
     world.setContactListener(new EntityCollisionListener());

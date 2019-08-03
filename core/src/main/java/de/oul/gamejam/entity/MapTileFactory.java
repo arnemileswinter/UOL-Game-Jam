@@ -28,12 +28,14 @@ public class MapTileFactory {
         PositionComponent position = engine.createComponent(PositionComponent.class);
         position.vector.set(x,y);
         tile.add(position);
+
         TextureComponent texture = engine.createComponent(TextureComponent.class);
         texture.textureRegion = textureRegion;
         tile.add(texture);
 
         PhysicsComponent physicsComponent = engine.createComponent(PhysicsComponent.class);
         physicsComponent.body = createWallPhysics(x, y);
+        physicsComponent.body.setUserData(tile);
         tile.add(physicsComponent);
 
         engine.addEntity(tile);

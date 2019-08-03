@@ -33,6 +33,8 @@ public class AlignDataWithPhysicsSystem extends IteratingSystem {
     PositionComponent position = entity.getComponent(PositionComponent.class);
     // Phyiscs without a position is no physics at all!
     if(position == null) return;
+
+    physics.colliding = null;
     physics.body.setTransform(position.vector, physics.body.getAngle());
 
     VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
