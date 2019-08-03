@@ -26,7 +26,7 @@ public class PlayerFactory {
     this.engine = engine;
     this.world = world;
 
-    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Hero1.png")));
+    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("HeroDown.png")));
   }
 
   /**
@@ -63,6 +63,11 @@ public class PlayerFactory {
     // make it possible to shoot
     ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
     player.add(shootingComponent);
+
+    //add view
+      ViewComponent viewComponent = engine.createComponent(ViewComponent.class);
+      viewComponent.assetString ="Hero";
+      player.add(viewComponent);
 
     HealthComponent healthComponent = engine.createComponent(HealthComponent.class);
     player.add(healthComponent);
