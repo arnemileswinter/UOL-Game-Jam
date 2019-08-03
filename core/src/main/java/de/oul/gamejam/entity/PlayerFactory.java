@@ -69,6 +69,9 @@ public class PlayerFactory {
       viewComponent.assetString ="Hero";
       player.add(viewComponent);
 
+    HealthComponent healthComponent = engine.createComponent(HealthComponent.class);
+    player.add(healthComponent);
+
     // Add the player to the engine.
     engine.addEntity(player);
     return player;

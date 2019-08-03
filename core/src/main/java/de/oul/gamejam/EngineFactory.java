@@ -5,14 +5,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.kotcrab.vis.ui.VisUI;
 import de.oul.gamejam.entity.BulletFactory;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
 import de.oul.gamejam.system.physics.PhysicsDebugRenderSystem;
 import de.oul.gamejam.system.physics.PhysicsSystem;
-
-import static de.oul.gamejam.JamGame.PIXELS_PER_METER;
+import de.oul.gamejam.ui.HealthBar;
+import de.oul.gamejam.ui.UI;
 
 /**
  * Initializes the engine with all its required systems.
@@ -52,6 +58,18 @@ public class EngineFactory {
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
     pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
     pooledEngine.addSystem(new ViewSystem());
+
+    // add UI
+    VisUI.load();
+    HealthBar healthBar = new HealthBar();
+    UI ui = new UI(healthBar);
+    ui.setFillParent(true);
+
+    pooledEngine.addSystem(new HealthBarSystem(healthBar));
+
+    Stage stage = new Stage(new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+    stage.addActor(ui);
+    pooledEngine.addSystem(new UISystem(stage));
 
     return pooledEngine;
   }

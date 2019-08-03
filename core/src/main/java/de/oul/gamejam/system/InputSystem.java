@@ -62,6 +62,9 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             velocity.y = 0;
             velocity.x = -1;
             view.changeView(View.Left);
+        } else if (Input.Keys.ENTER == keycode) {
+            ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
+            shootingComponent.isShooting = true;
         }
 
         move = true;
@@ -78,6 +81,10 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
         velocity.x =0;
         velocity.y =0;
+        if (Input.Keys.ENTER == keycode) {
+            ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
+            shootingComponent.isShooting = false;
+        }
         return false;
     }
 
