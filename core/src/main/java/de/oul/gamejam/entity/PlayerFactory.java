@@ -60,6 +60,10 @@ public class PlayerFactory {
     VelocityComponent velocityComponent = engine.createComponent(VelocityComponent.class);
     player.add(velocityComponent);
 
+    // make it possible to shoot
+    ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
+    player.add(shootingComponent);
+
     // Add the player to the engine.
     engine.addEntity(player);
     return player;

@@ -5,9 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
+import de.oul.gamejam.entity.BulletFactory;
 import de.oul.gamejam.system.CameraFocusPlayerSystem;
 import de.oul.gamejam.system.InputSystem;
 import de.oul.gamejam.system.RenderingSystem;
+import de.oul.gamejam.system.ShootingSystem;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
 import de.oul.gamejam.system.physics.PhysicsDebugRenderSystem;
@@ -29,7 +31,7 @@ public class EngineFactory {
   }
 
   public PooledEngine createEngine() {
-    Camera camera = new OrthographicCamera(Gdx.graphics.getWidth() / PIXELS_PER_METER, Gdx.graphics.getHeight() / PIXELS_PER_METER);
+    Camera camera = new OrthographicCamera();
 
     PooledEngine pooledEngine = new PooledEngine();
 
@@ -40,8 +42,12 @@ public class EngineFactory {
     pooledEngine.addSystem(new CameraFocusPlayerSystem(camera));
     pooledEngine.addSystem(new InputSystem());
 
+    // combat
+    pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
+
     // add physics systems.
     world.setContactListener(new EntityCollisionListener());
+    world.setContactFilter(new BulletCollisionFilter());
     pooledEngine.addSystem(new AlignDataWithPhysicsSystem());
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
