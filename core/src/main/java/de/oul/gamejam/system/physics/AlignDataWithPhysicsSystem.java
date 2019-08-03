@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PositionComponent;
+import de.oul.gamejam.component.VelocityComponent;
 
 /**
  * Applies the location of the transform component onto the physics body.
@@ -16,7 +17,7 @@ public class AlignDataWithPhysicsSystem extends IteratingSystem {
    * Instantiates a system that will iterate over the entities described by the Family.
    */
   public AlignDataWithPhysicsSystem(){
-    super(Family.all(PhysicsComponent.class, PositionComponent.class).get());
+    super(Family.all(PhysicsComponent.class).one(PositionComponent.class, VelocityComponent.class).get());
   }
 
   /**
@@ -30,7 +31,13 @@ public class AlignDataWithPhysicsSystem extends IteratingSystem {
   protected void processEntity(Entity entity, float deltaTime){
     PhysicsComponent physics = entity.getComponent(PhysicsComponent.class);
     PositionComponent position = entity.getComponent(PositionComponent.class);
-
+    // Phyiscs without a position is no physics at all!
+    if(position == null) return;
     physics.body.setTransform(position.vector, physics.body.getAngle());
+
+    VelocityComponent velocityComponent = entity.getComponent(VelocityComponent.class);
+    if(velocityComponent != null) {
+      physics.body.setLinearVelocity(velocityComponent.vector);
+    }
   }
 }
