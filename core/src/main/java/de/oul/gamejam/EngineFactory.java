@@ -24,8 +24,10 @@ public class EngineFactory {
    * The box2d Physics world
    */
   private final World world;
+  private final Scoreboard scoreboard;
 
   public EngineFactory(World world, Scoreboard scoreboard){
+    this.scoreboard = scoreboard;
     this.world = world;
   }
 
@@ -64,7 +66,7 @@ public class EngineFactory {
 
     // add UI
     HealthBar healthBar = new HealthBar();
-    UI ui = new UI(healthBar);
+    UI ui = new UI(healthBar, scoreboard);
     ui.setFillParent(true);
 
     pooledEngine.addSystem(new HealthBarSystem(healthBar));
