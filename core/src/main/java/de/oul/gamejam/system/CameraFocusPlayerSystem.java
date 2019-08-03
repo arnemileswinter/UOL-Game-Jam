@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
-import de.oul.gamejam.component.PlayerComponment;
+import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.component.PositionComponent;
 
 /**
@@ -18,7 +18,7 @@ public class CameraFocusPlayerSystem extends IteratingSystem {
    * Instantiates a system that will iterate over the entities described by the Family.
    */
   public CameraFocusPlayerSystem(Camera camera){
-    super(Family.all(PlayerComponment.class, PositionComponent.class).get());
+    super(Family.all(PlayerComponent.class, PositionComponent.class).get());
     this.camera = camera;
   }
 
