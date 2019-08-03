@@ -46,11 +46,15 @@ public class EngineFactory {
     pooledEngine.addSystem(new CameraFocusPlayerSystem(camera));
     pooledEngine.addSystem(new InputSystem());
 
+    // Enemy Systems
+    pooledEngine.addSystem(new EnemyDeathSystem());
+    pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
+    pooledEngine.addSystem(new MoveEnemySystem());
+
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
     pooledEngine.addSystem(new BulletHurtSystem());
-    pooledEngine.addSystem(new EnemyDeathSystem());
-    pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
+
 
     // add physics systems.
     world.setContactListener(new EntityCollisionListener());
