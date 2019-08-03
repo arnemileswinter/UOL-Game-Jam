@@ -6,8 +6,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.oul.gamejam.component.PositionComponent;
-import de.oul.gamejam.component.TextureComponent;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Align;
+import de.oul.gamejam.component.*;
 
 import static de.oul.gamejam.JamGame.PIXELS_PER_METER;
 
@@ -18,6 +20,8 @@ public class RenderingSystem extends IteratingSystem {
   private final SpriteBatch spriteBatch;
   private final Camera      camera;
 
+  private final Family entitiesWithHealthBars;
+
   /**
    * Instantiates a system that will iterate over the entities described by the Family.
    */
@@ -26,6 +30,7 @@ public class RenderingSystem extends IteratingSystem {
     this.camera = camera;
     spriteBatch = new SpriteBatch();
 
+    entitiesWithHealthBars = Family.all(HealthComponent.class).exclude(PlayerComponent.class).get();
   }
 
   /**
@@ -34,8 +39,8 @@ public class RenderingSystem extends IteratingSystem {
    */
   @Override
   public void update(float delta){
-    camera.viewportHeight = Gdx.graphics.getHeight() / 2f / PIXELS_PER_METER;
-    camera.viewportWidth = Gdx.graphics.getWidth() / 2f / PIXELS_PER_METER;
+    camera.viewportHeight = Gdx.graphics.getHeight() / PIXELS_PER_METER;
+    camera.viewportWidth = Gdx.graphics.getWidth()  / PIXELS_PER_METER;
     camera.update();
     spriteBatch.begin();
     spriteBatch.setProjectionMatrix(camera.combined);

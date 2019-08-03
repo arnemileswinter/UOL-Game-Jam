@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.kotcrab.vis.ui.VisUI;
 import de.oul.gamejam.entity.BulletFactory;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
@@ -59,7 +58,6 @@ public class EngineFactory {
     pooledEngine.addSystem(new ViewSystem());
 
     // add UI
-    VisUI.load();
     HealthBar healthBar = new HealthBar();
     UI ui = new UI(healthBar);
     ui.setFillParent(true);
@@ -68,7 +66,7 @@ public class EngineFactory {
 
     Stage stage = new Stage(new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
     stage.addActor(ui);
-    pooledEngine.addSystem(new UISystem(stage));
+    pooledEngine.addSystem(new UISystem(stage, camera));
 
     return pooledEngine;
   }
