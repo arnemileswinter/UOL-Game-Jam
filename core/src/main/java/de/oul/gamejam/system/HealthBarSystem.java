@@ -5,14 +5,14 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.HealthComponent;
-import de.oul.gamejam.component.PlayerComponment;
+import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.ui.HealthBar;
 
 public class HealthBarSystem extends IteratingSystem {
   private final HealthBar healthBar;
 
   public HealthBarSystem(HealthBar healthBar){
-    super(Family.all(PlayerComponment.class, HealthComponent.class).get());
+    super(Family.all(PlayerComponent.class, HealthComponent.class).get());
     this.healthBar = healthBar;
   }
 
