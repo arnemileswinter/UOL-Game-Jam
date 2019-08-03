@@ -5,7 +5,8 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import de.oul.gamejam.component.PlayerComponment;
+import com.badlogic.gdx.physics.box2d.*;
+import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.TextureComponent;
 
@@ -17,12 +18,15 @@ public class PlayerFactory {
   private final PooledEngine engine;
   /** The texture to apply to the player. */
   private final TextureRegion textureRegion;
+  /** The box2d physics world. */
+  private final World world;
 
   /**
    * @param engine The pool to create components with.
    */
-  public PlayerFactory(PooledEngine engine) {
+  public PlayerFactory(PooledEngine engine, World world) {
     this.engine = engine;
+    this.world = world;
 
     textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Enemy4.png")));
   }
@@ -35,20 +39,48 @@ public class PlayerFactory {
    */
   public Entity createPlayer(float x, float y) {
     Entity player = engine.createEntity();
+
     // Give the player a position.
     PositionComponent position = engine.createComponent(PositionComponent.class);
     position.vector.set(x,y);
     player.add(position);
+
     // Give the player a texture.
     TextureComponent texture = engine.createComponent(TextureComponent.class);
     texture.textureRegion = textureRegion;
     player.add(texture);
 
-    PlayerComponment playerComponment = engine.createComponent(PlayerComponment.class);
-    player.add(playerComponment);
+    // Give the player physics.
+    PhysicsComponent physics = engine.createComponent(PhysicsComponent.class);
+    physics.body = this.getPlayerBody(x,y);
+    player.add(physics);
 
     // Add the player to the engine.
     engine.addEntity(player);
     return player;
-  };
+  }
+
+  /**
+   * Creates a physics body for the player.
+   * @param x The x-coordinate that the player's body spawns at.
+   * @param y The y-coordinate that the player's body spawns at.
+   * @return The physics body for the player.
+   */
+  private Body getPlayerBody(float x, float y){
+    BodyDef bodyDef = new BodyDef();
+    bodyDef.position.set(x,y);
+    bodyDef.type = BodyDef.BodyType.DynamicBody;
+
+    Body body = world.createBody(bodyDef);
+
+    FixtureDef fixtureDef = new FixtureDef();
+    CircleShape circleShape = new CircleShape();
+    circleShape.setRadius(1);
+    fixtureDef.shape = circleShape;
+
+    body.createFixture(fixtureDef);
+    circleShape.dispose();
+    return body;
+  }
+
 }
