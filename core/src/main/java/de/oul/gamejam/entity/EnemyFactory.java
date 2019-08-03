@@ -41,6 +41,7 @@ public class EnemyFactory {
         // Give the enemy physics.
         PhysicsComponent physics = engine.createComponent(PhysicsComponent.class);
         physics.body = this.getPlayerBody(x,y);
+        physics.body.setUserData(enemy);
         enemy.add(physics);
 
         // make it the enemy

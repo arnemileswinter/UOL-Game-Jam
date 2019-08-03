@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.BulletComponent;
 import de.oul.gamejam.component.HealthComponent;
 import de.oul.gamejam.component.PhysicsComponent;
+import de.oul.gamejam.component.ShootingComponent;
 
 public class BulletHurtSystem extends IteratingSystem {
   public BulletHurtSystem(){
@@ -28,7 +29,8 @@ public class BulletHurtSystem extends IteratingSystem {
 
     HealthComponent enemyHealth = physicsComponent.colliding.getComponent(HealthComponent.class);
     if (enemyHealth != null){
-      enemyHealth.current -= bulletComponent.damage;
+      float damage = bulletComponent.owner.getComponent(ShootingComponent.class).bulletDamage;
+      enemyHealth.current -= damage;
     }
 
     getEngine().removeEntity(bullet);
