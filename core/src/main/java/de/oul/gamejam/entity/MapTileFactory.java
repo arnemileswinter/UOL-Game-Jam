@@ -9,12 +9,12 @@ import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.TextureComponent;
 
 
-public class MapTitleFactory {
+public class MapTileFactory {
 
     private final PooledEngine engine;
     private final TextureRegion textureRegion;
 
-    public MapTitleFactory(PooledEngine engine){
+    public MapTileFactory(PooledEngine engine){
         this.engine = engine;
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Wall.png")));
     }

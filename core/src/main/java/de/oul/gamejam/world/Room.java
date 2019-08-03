@@ -1,7 +1,7 @@
 package de.oul.gamejam.world;
 
 import com.badlogic.ashley.core.PooledEngine;
-import de.oul.gamejam.entity.MapTitleFactory;
+import de.oul.gamejam.entity.MapTileFactory;
 
 public abstract class Room {
     protected PooledEngine pooledEngine;
@@ -35,11 +35,11 @@ public abstract class Room {
     }
 
     public void createRoom(boolean[][]room){
-        MapTitleFactory mapTitleFactory = new MapTitleFactory(pooledEngine);
+        MapTileFactory mapTileFactory = new MapTileFactory(pooledEngine);
         for(int i = 0; i<10;i++){
             for(int j = 0; j<10;j++){
                 if(room[j][i]){
-                    mapTitleFactory.createWand(i + roomPositionX*roomSize,-j + (-1*roomPositionY+9)*roomSize);
+                    mapTileFactory.createWand(i + roomPositionX*roomSize,-j + (-1*roomPositionY+9)*roomSize);
                 }
             }
         }
