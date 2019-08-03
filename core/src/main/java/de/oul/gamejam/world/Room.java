@@ -5,10 +5,9 @@ import de.oul.gamejam.entity.MapTitleFactory;
 
 public abstract class Room {
     protected PooledEngine pooledEngine;
-    protected int titleSize = 32;
     private int roomPositionX;
     private int roomPositionY;
-    private int roomSize = 320;
+    private int roomSize = 10;
     protected boolean topDoor;
     protected boolean bottomDoor;
     protected boolean leftDoor;
@@ -40,7 +39,7 @@ public abstract class Room {
         for(int i = 0; i<10;i++){
             for(int j = 0; j<10;j++){
                 if(room[j][i]){
-                    mapTitleFactory.createWand(j + roomPositionX,i + roomPositionY);
+                    mapTitleFactory.createWand(i + roomPositionX*roomSize,-j + (-1*roomPositionY+9)*roomSize);
                 }
             }
         }

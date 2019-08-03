@@ -23,7 +23,7 @@ public class FirstScreen implements Screen {
 		EngineFactory engineFactory = new EngineFactory(world);
 		engine = engineFactory.createEngine();
 		PlayerFactory playerFactory = new PlayerFactory(engine, world);
-		playerFactory.createPlayer(-5,-5);
+		playerFactory.createPlayer(5,5);
 		LevelFactory levelFactory = new LevelFactory(engine);
 		levelFactory.createLevel();
 

@@ -5,7 +5,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PlayerComponment;
 import de.oul.gamejam.component.PositionComponent;
 
@@ -26,7 +28,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-
         return false;
     }
 
