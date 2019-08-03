@@ -1,15 +1,22 @@
 package de.oul.gamejam.system;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import de.oul.gamejam.component.PlayerComponment;
+import de.oul.gamejam.component.PositionComponent;
 
-public class ImputSystem extends IteratingSystem implements InputProcessor {
+
+public class InputSystem extends IteratingSystem implements InputProcessor {
+    private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
 
 
-    public ImputSystem(Family family) {
-        super(family);
+    public InputSystem() {
+        super(Family.all(PositionComponent.class, PlayerComponment.class).get());
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -19,6 +26,7 @@ public class ImputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+
         return false;
     }
 
@@ -29,6 +37,7 @@ public class ImputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyTyped(char character) {
+
         return false;
     }
 

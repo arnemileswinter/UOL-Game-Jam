@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import de.oul.gamejam.component.PlayerComponment;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.TextureComponent;
 
@@ -42,6 +43,9 @@ public class PlayerFactory {
     TextureComponent texture = engine.createComponent(TextureComponent.class);
     texture.textureRegion = textureRegion;
     player.add(texture);
+
+    PlayerComponment playerComponment = engine.createComponent(PlayerComponment.class);
+    player.add(playerComponment);
 
     // Add the player to the engine.
     engine.addEntity(player);

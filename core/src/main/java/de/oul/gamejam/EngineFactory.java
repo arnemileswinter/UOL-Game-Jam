@@ -2,6 +2,7 @@ package de.oul.gamejam;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.physics.box2d.World;
+import de.oul.gamejam.system.InputSystem;
 import de.oul.gamejam.system.RenderingSystem;
 
 /**
@@ -22,6 +23,7 @@ public class EngineFactory {
 
     // add systems.
     pooledEngine.addSystem(new RenderingSystem());
+    pooledEngine.addSystem(new InputSystem());
     // TODO: Physics
 
     return pooledEngine;

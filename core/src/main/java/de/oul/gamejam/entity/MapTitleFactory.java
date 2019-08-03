@@ -16,7 +16,7 @@ public class MapTitleFactory {
 
     public MapTitleFactory(PooledEngine engine){
         this.engine = engine;
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Mauer.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Wall.png")));
     }
 
     public Entity createWand(float x, float y){
