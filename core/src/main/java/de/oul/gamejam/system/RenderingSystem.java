@@ -1,5 +1,6 @@
 package de.oul.gamejam.system;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -19,6 +20,8 @@ import static de.oul.gamejam.JamGame.PIXELS_PER_METER;
 public class RenderingSystem extends IteratingSystem {
   private final SpriteBatch spriteBatch;
   private final Camera      camera;
+  private final ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
+  private final ComponentMapper<TextureComponent> tm = ComponentMapper.getFor(TextureComponent.class);
 
   private final Family entitiesWithHealthBars;
 
@@ -57,8 +60,10 @@ public class RenderingSystem extends IteratingSystem {
    */
   @Override
   protected void processEntity(Entity entity, float deltaTime){
-    TextureComponent  texture  = entity.getComponent(TextureComponent.class);
-    PositionComponent position = entity.getComponent(PositionComponent.class);
+    TextureComponent  texture  = tm.get(entity);
+    if(!texture.isVisible) return;
+
+    PositionComponent position = pm.get(entity);
 
     float width  = texture.textureRegion.getRegionWidth();
     float height = texture.textureRegion.getRegionHeight();
