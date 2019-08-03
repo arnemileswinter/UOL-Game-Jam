@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.ShootingComponent;
+import de.oul.gamejam.component.ViewComponent;
 import de.oul.gamejam.entity.BulletFactory;
 
 public class ShootingSystem extends IteratingSystem {
@@ -27,7 +28,9 @@ public class ShootingSystem extends IteratingSystem {
 
     PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
 
+    ViewComponent viewComponent = entity.getComponent(ViewComponent.class);
+
     shootingComponent.timeSinceLastShot -= shootingComponent.shootSpeed;
-    bulletFactory.shootBullet(entity, 1, positionComponent.vector, shootingComponent.bulletSpeed, -45);
+    bulletFactory.shootBullet(entity, 1, positionComponent.vector, shootingComponent.bulletSpeed,     viewComponent.view.angle);
   }
 }
