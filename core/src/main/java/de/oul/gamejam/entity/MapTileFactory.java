@@ -13,9 +13,9 @@ import de.oul.gamejam.component.TextureComponent;
 
 public class MapTileFactory {
 
-    private final PooledEngine engine;
+    public final PooledEngine engine;
     private final TextureRegion textureRegion;
-    private final World world;
+    public final World world;
 
     public MapTileFactory(PooledEngine engine, World world){
         this.engine = engine;

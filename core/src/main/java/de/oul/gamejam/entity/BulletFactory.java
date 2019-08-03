@@ -31,7 +31,6 @@ public class BulletFactory {
 
     BulletComponent bulletComponent = pooledEngine.createComponent(BulletComponent.class);
     bulletComponent.owner = owner;
-    bulletComponent.damage = damage;
     bullet.add(bulletComponent);
 
     PositionComponent positionComponent = pooledEngine.createComponent(PositionComponent.class);

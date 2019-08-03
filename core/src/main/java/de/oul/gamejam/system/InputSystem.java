@@ -20,7 +20,7 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     boolean move = false;
 
     public InputSystem() {
-        super(Family.all(PositionComponent.class, PlayerComponment.class).get());
+        super(Family.all(PositionComponent.class, PlayerComponent.class).get());
         Gdx.input.setInputProcessor(this);
     }
 
@@ -31,8 +31,12 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
 
         float speed = entity.getComponent(VelocityComponent.class).speed;
-        position.x += velocity.x*speed;
-        position.y += velocity.y*speed;
+        float diagonalSpeed = speed;
+        if(velocity.x != 0 && velocity.y !=0  ){
+            diagonalSpeed = diagonalSpeed /2;
+        }
+        position.x += velocity.x*diagonalSpeed;
+        position.y += velocity.y*diagonalSpeed;
 
 
 
@@ -41,26 +45,22 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
             player = entity;
         }
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
         ViewComponent view = player.getComponent(ViewComponent.class);
         if(Input.Keys.W == keycode){
-            velocity.y = 1;
-            velocity.x = 0;
+            velocity.y += 1;
             view.changeView(View.Up);
         }else if(Input.Keys.D == keycode){
-            velocity.y = 0;
-            velocity.x = 1;
+            velocity.x += 1;
             view.changeView(View.Right);
         }else if(Input.Keys.S == keycode){
-            velocity.y = -1;
-            velocity.x = 0;
+            velocity.y += -1;
             view.changeView(View.Down);
         }else if(Input.Keys.A == keycode){
-            velocity.y = 0;
-            velocity.x = -1;
+            velocity.x += -1;
             view.changeView(View.Left);
         } else if (Input.Keys.ENTER == keycode) {
             ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
@@ -75,12 +75,24 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
         Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponment.class, VelocityComponent.class).get())){
+        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
             player = entity;
         }
         Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
-        velocity.x =0;
-        velocity.y =0;
+        ViewComponent view = player.getComponent(ViewComponent.class);
+        if(Input.Keys.W == keycode){
+            velocity.y = 0;
+            view.changeView(View.Up);
+        }else if(Input.Keys.D == keycode){
+            velocity.x = 0;
+            view.changeView(View.Right);
+        }else if(Input.Keys.S == keycode){
+            velocity.y = 0;
+            view.changeView(View.Down);
+        }else if(Input.Keys.A == keycode){
+            velocity.x = 0;
+            view.changeView(View.Left);
+        }
         if (Input.Keys.ENTER == keycode) {
             ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
             shootingComponent.isShooting = false;

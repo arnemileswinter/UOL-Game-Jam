@@ -15,6 +15,9 @@ public class LevelFactory {
   }
 
   public void createLevel(){
+    int goalX = createRandomInt();
+    int goalY = createRandomInt();
+    System.out.println(goalX +" "+ goalY);
     for (int x = 0; x < 10; x++) {
       for (int y = 9; y >= 0; y--) {
         boolean bottomDoor = randomBoolean();
@@ -42,7 +45,12 @@ public class LevelFactory {
         if (y == 0) {
           topDoor = false;
         }
-        rooms[y][x] = new BasicRoom(mapTileFactory, x, y, bottomDoor, leftDoor, rightDoor, topDoor);
+        BasicRoom basicRoom = new BasicRoom(mapTileFactory, x, y, bottomDoor, leftDoor, rightDoor, topDoor);
+        if(x==goalX && y == goalY){
+          basicRoom.goal = true;
+        }
+        basicRoom.createRoom(basicRoom.room);
+        rooms[y][x] = basicRoom;
       }
     }
   }
@@ -50,5 +58,9 @@ public class LevelFactory {
   private boolean randomBoolean(){
     int number = random.nextInt(10);
     return number < 7;
+  }
+
+  private int createRandomInt(){
+    return random.nextInt(10);
   }
 }
