@@ -34,6 +34,7 @@ public class EngineFactory {
 
     // add systems.
     pooledEngine.addSystem(new RenderingSystem(camera));
+    pooledEngine.addSystem(new SwitchAssetSystem());
 
     // player systems
     pooledEngine.addSystem(new CameraFocusPlayerSystem(camera));

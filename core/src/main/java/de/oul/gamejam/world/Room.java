@@ -1,6 +1,7 @@
 package de.oul.gamejam.world;
 
 import com.badlogic.ashley.core.PooledEngine;
+import de.oul.gamejam.entity.GoalFactory;
 import de.oul.gamejam.entity.MapTileFactory;
 
 public abstract class Room {
@@ -12,6 +13,7 @@ public abstract class Room {
     protected boolean bottomDoor;
     protected boolean leftDoor;
     protected boolean rightDoor;
+    protected boolean goal = false;
 
     protected boolean[][] room = new boolean[10][10];
 
@@ -41,6 +43,15 @@ public abstract class Room {
                     mapTileFactory.createWall(i + roomPositionX*roomSize, -j + (-1*roomPositionY+9)*roomSize);
                 }
             }
+
         }
+        if(goal){
+            createGoal(5 + roomPositionX*roomSize, -5 + (-1*roomPositionY+9)*roomSize);
+        }
+    }
+
+    private void createGoal(float x, float y){
+        GoalFactory goalFactory = new GoalFactory(mapTileFactory.engine,mapTileFactory.world);
+        goalFactory.createGoal(x,y);
     }
 }

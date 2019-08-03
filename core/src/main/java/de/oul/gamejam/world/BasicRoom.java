@@ -38,7 +38,6 @@ public class BasicRoom extends Room {
       room[9][4] = false;
       room[9][5] = false;
     }
-    createRoom(room);
   }
 
   private void displayMatrix(int N, boolean[][] mat){
