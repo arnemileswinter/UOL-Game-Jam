@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.component.PowerUpComponent;
+import de.oul.gamejam.component.ToRemoveComponent;
 
 public class PowerupSystem extends IteratingSystem {
 
@@ -29,6 +30,6 @@ public class PowerupSystem extends IteratingSystem {
     powC.nerfStrategy.nerf(player);
 
     // The Power-Up is collected and applied.
-    getEngine().removeEntity(powerUp);
+    powerUp.add(getEngine().createComponent(ToRemoveComponent.class));
   }
 }

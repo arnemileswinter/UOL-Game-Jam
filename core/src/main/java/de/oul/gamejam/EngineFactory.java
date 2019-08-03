@@ -37,6 +37,11 @@ public class EngineFactory {
     PooledEngine pooledEngine = new PooledEngine();
 
     // add systems.
+
+    // housekeeping
+    pooledEngine.addSystem(new ToRemoveSystem());
+
+    // visibility
     pooledEngine.addSystem(new VisibilitySystem(camera));
     pooledEngine.addSystem(new RenderingSystem(camera));
     pooledEngine.addSystem(new SwitchAssetSystem());

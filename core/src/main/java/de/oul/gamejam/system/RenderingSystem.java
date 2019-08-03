@@ -23,8 +23,6 @@ public class RenderingSystem extends IteratingSystem {
   private final ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
   private final ComponentMapper<TextureComponent> tm = ComponentMapper.getFor(TextureComponent.class);
 
-  private final Family entitiesWithHealthBars;
-
   /**
    * Instantiates a system that will iterate over the entities described by the Family.
    */
@@ -32,8 +30,6 @@ public class RenderingSystem extends IteratingSystem {
     super(Family.all(PositionComponent.class, TextureComponent.class).get());
     this.camera = camera;
     spriteBatch = new SpriteBatch();
-
-    entitiesWithHealthBars = Family.all(HealthComponent.class).exclude(PlayerComponent.class).get();
   }
 
   /**

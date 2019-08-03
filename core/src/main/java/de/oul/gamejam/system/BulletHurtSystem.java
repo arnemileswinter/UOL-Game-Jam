@@ -2,13 +2,12 @@ package de.oul.gamejam.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.systems.IteratingSystem;
-import de.oul.gamejam.component.BulletComponent;
-import de.oul.gamejam.component.HealthComponent;
-import de.oul.gamejam.component.PhysicsComponent;
-import de.oul.gamejam.component.ShootingComponent;
+import de.oul.gamejam.component.*;
 
 public class BulletHurtSystem extends IteratingSystem {
+
   public BulletHurtSystem(){
     super(Family.all(BulletComponent.class, PhysicsComponent.class).get());
   }
@@ -33,6 +32,6 @@ public class BulletHurtSystem extends IteratingSystem {
       enemyHealth.current -= damage;
     }
 
-    getEngine().removeEntity(bullet);
+    bullet.add(getEngine().createComponent(ToRemoveComponent.class));
   }
 }
