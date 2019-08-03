@@ -28,7 +28,7 @@ public class PlayerFactory {
     this.engine = engine;
     this.world = world;
 
-    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("player.png")));
+    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Hero1.png")));
   }
 
   /**
