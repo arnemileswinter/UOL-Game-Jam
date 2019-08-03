@@ -6,10 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
-import de.oul.gamejam.component.PhysicsComponent;
-import de.oul.gamejam.component.PlayerComponment;
-import de.oul.gamejam.component.PositionComponent;
-import de.oul.gamejam.component.TextureComponent;
+import de.oul.gamejam.component.*;
 
 /**
  * Creates a player entity, adds its components and puts it into the engine.
@@ -59,6 +56,10 @@ public class PlayerFactory {
     // make it the player
     PlayerComponment playerComponent = engine.createComponent(PlayerComponment.class);
     player.add(playerComponent);
+
+    // make it possible to shoot
+    ShootingComponent shootingComponent = engine.createComponent(ShootingComponent.class);
+    player.add(shootingComponent);
 
     // Add the player to the engine.
     engine.addEntity(player);
