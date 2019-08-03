@@ -40,7 +40,7 @@ public abstract class Room {
         for(int i = 0; i<10;i++){
             for(int j = 0; j<10;j++){
                 if(room[j][i]){
-                    mapTitleFactory.createWand(-160+i*titleSize + roomPositionX*roomSize,160-j*titleSize+ roomPositionY*roomSize);
+                    mapTitleFactory.createWand(-160+i*titleSize + roomPositionX*roomSize,160-j*titleSize+ (-1*roomPositionY+9)*roomSize);
                 }
             }
         }

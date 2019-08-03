@@ -23,7 +23,7 @@ public class PlayerFactory {
   public PlayerFactory(PooledEngine engine) {
     this.engine = engine;
 
-    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("player.png")));
+    textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Enemy4.png")));
   }
 
   /**
