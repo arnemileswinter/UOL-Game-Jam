@@ -48,6 +48,7 @@ public class BulletFactory {
 
     PhysicsComponent physicsComponent = pooledEngine.createComponent(PhysicsComponent.class);
     physicsComponent.body = createBulletBody(position.x, position.y);
+    physicsComponent.body.setUserData(bullet);
     bullet.add(physicsComponent);
 
     pooledEngine.addEntity(bullet);

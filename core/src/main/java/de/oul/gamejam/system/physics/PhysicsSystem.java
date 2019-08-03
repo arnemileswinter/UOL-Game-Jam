@@ -59,8 +59,6 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
    */
   @Override
   public void entityAdded(Entity entity){
-    // setUserData on a body makes it so that box2d returns an entity upon collisions.
-    entity.getComponent(PhysicsComponent.class).body.setUserData(entity);
   }
 
   /**

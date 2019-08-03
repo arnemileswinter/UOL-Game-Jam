@@ -56,7 +56,8 @@ public class EntityCollisionListener implements ContactListener {
       // set the CollisionEntity of the component
       if (physics != null) {
         physics.colliding = colEnt;
-      } else if (physicsB != null) {
+      }
+      if (physicsB != null) {
         physicsB.colliding = ent;
       }
     }

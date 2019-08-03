@@ -90,7 +90,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyTyped(char character) {
-
         return false;
     }
 

@@ -51,6 +51,7 @@ public class PlayerFactory {
     // Give the player physics.
     PhysicsComponent physics = engine.createComponent(PhysicsComponent.class);
     physics.body = this.getPlayerBody(x,y);
+    physics.body.setUserData(player);
     player.add(physics);
 
     // make it the player
