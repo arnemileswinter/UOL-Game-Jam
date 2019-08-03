@@ -6,10 +6,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Align;
-import de.oul.gamejam.component.*;
+import de.oul.gamejam.component.PositionComponent;
+import de.oul.gamejam.component.TextureComponent;
 
 import static de.oul.gamejam.JamGame.PIXELS_PER_METER;
 

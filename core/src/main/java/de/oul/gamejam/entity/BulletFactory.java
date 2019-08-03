@@ -20,7 +20,7 @@ public class BulletFactory {
   public BulletFactory(PooledEngine pooledEngine, World world){
     this.pooledEngine = pooledEngine;
     this.world = world;
-    this.textureRegion = new TextureRegion(new Texture(Gdx.files.internal("Enemy3.png")));
+    this.textureRegion = new TextureRegion(new Texture(Gdx.files.internal("RobotDown.png")));
     bodyDef = new BodyDef();
     fixtureDef  = new FixtureDef();
     circleShape = new CircleShape();
