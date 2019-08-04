@@ -24,9 +24,6 @@ public class FirstScreen implements Screen {
     World         world         = new World(new Vector2(0, 0), true);
     EngineFactory engineFactory = new EngineFactory(world, new Scoreboard());
     engine = engineFactory.createEngine();
-    LevelFactory levelFactory = new LevelFactory(new MapTileFactory(engine, world));
-    levelFactory.createLevel();
-
   }
 
   /**

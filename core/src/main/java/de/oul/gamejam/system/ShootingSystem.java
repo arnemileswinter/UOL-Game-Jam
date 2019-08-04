@@ -38,7 +38,7 @@ public class ShootingSystem extends IteratingSystem {
     if(entity.getComponent(ShootingCreatesEnemiesComponent.class) == null) {
       bulletFactory.shootBullet(entity, 1, positionComponent.vector, shootingComponent.bulletSpeed,     viewComponent.view.angle);
     } else {
-      enemyFactory.createEnemy((int) positionComponent.vector.x, (int) positionComponent.vector.y);
+      enemyFactory.spawn((int) positionComponent.vector.x, (int) positionComponent.vector.y);
     }
   }
 }

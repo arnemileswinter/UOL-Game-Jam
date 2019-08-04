@@ -1,6 +1,6 @@
 package de.oul.gamejam.world;
 
-import com.badlogic.ashley.core.PooledEngine;
+import de.oul.gamejam.entity.EnemyFactory;
 import de.oul.gamejam.entity.MapTileFactory;
 
 import java.util.Random;
@@ -8,11 +8,12 @@ import java.util.Random;
 public class LevelFactory {
   private final MapTileFactory mapTileFactory;
   Random random = new Random();
-  private Room[][] rooms = new Room[10][10];
+  public Room[][] rooms = new Room[10][10];
 
   public LevelFactory(MapTileFactory mapTileFactory){
     this.mapTileFactory = mapTileFactory;
   }
+
 
   public void createLevel(){
     int goalX = createRandomInt();

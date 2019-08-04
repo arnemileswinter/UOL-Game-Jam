@@ -1,8 +1,12 @@
 package de.oul.gamejam.world;
 
 import com.badlogic.ashley.core.PooledEngine;
+import de.oul.gamejam.entity.EnemyFactory;
 import de.oul.gamejam.entity.GoalFactory;
 import de.oul.gamejam.entity.MapTileFactory;
+import de.oul.gamejam.entity.SpawnInterface;
+
+import java.util.Random;
 
 public abstract class Room {
     private final MapTileFactory mapTileFactory;
@@ -43,15 +47,22 @@ public abstract class Room {
                     mapTileFactory.createWall(i + roomPositionX*roomSize, -j + (-1*roomPositionY+9)*roomSize);
                 }
             }
-
         }
         if(goal){
-            createGoal(5 + roomPositionX*roomSize, -5 + (-1*roomPositionY+9)*roomSize);
+            createEntity(new GoalFactory(mapTileFactory.engine,mapTileFactory.world),5 + roomPositionX*roomSize, -5 + (-1*roomPositionY+9)*roomSize);
         }
     }
 
-    private void createGoal(float x, float y){
-        GoalFactory goalFactory = new GoalFactory(mapTileFactory.engine,mapTileFactory.world);
-        goalFactory.createGoal(x,y);
+    public void createEntity(SpawnInterface spawnInterface, int x, int y){
+        Random random = new Random();
+        if(spawnInterface instanceof GoalFactory) {
+            spawnInterface.spawn(x, y);
+        }else if (spawnInterface instanceof EnemyFactory){
+            while(room[x][y]){
+                x = random.nextInt(9);
+                y = random.nextInt(9);
+            }
+            spawnInterface.spawn(x+roomPositionX*roomSize,-y+(-1*roomPositionY+9)*roomSize);
+        }
     }
 }
