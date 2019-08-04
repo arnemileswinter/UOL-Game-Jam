@@ -12,7 +12,7 @@ import de.oul.gamejam.component.ToRemoveComponent;
 public class PlayerDeathSystem extends IteratingSystem {
 
     public PlayerDeathSystem(){
-        super(Family.all(PlayerComponent.class).get().exclude(ToRemoveComponent.class).get());
+        super(Family.all(PlayerComponent.class, HealthComponent.class).exclude(ToRemoveComponent.class).get());
 
     }
 
