@@ -59,6 +59,13 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             }else if(Input.Keys.A == keycode){
                 velocity.x += -1;
                 view.changeView(View.Left);
+            }else if(Input.Keys.TAB == keycode){
+                Entity entity = null;
+                for(Entity Vplayer:getEngine().getEntitiesFor(Family.all(FocusedComponent.class).get())){
+                    entity = Vplayer;
+                }
+                getEngine().getSystem(CameraFocusPlayerSystem.class).changePlayer(entity);
+
             }
         }
 
@@ -67,24 +74,22 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        Entity player = null;
-        for(Entity entity: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
-            player = entity;
-        }
-        Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
-        ViewComponent view = player.getComponent(ViewComponent.class);
-        if(Input.Keys.W == keycode){
-            velocity.y = 0;
-            view.changeView(View.Up);
-        }else if(Input.Keys.D == keycode){
-            velocity.x = 0;
-            view.changeView(View.Right);
-        }else if(Input.Keys.S == keycode){
-            velocity.y = 0;
-            view.changeView(View.Down);
-        }else if(Input.Keys.A == keycode){
-            velocity.x = 0;
-            view.changeView(View.Left);
+        for(Entity player: getEngine().getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class).get())){
+            Vector2 velocity = player.getComponent(VelocityComponent.class).vector;
+            ViewComponent view = player.getComponent(ViewComponent.class);
+            if(Input.Keys.W == keycode){
+                velocity.y = 0;
+                view.changeView(View.Up);
+            }else if(Input.Keys.D == keycode){
+                velocity.x = 0;
+                view.changeView(View.Right);
+            }else if(Input.Keys.S == keycode){
+                velocity.y = 0;
+                view.changeView(View.Down);
+            }else if(Input.Keys.A == keycode){
+                velocity.x = 0;
+                view.changeView(View.Left);
+            }
         }
         return false;
     }

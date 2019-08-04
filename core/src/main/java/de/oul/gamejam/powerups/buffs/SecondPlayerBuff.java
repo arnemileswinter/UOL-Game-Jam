@@ -49,7 +49,7 @@ public class SecondPlayerBuff implements BuffStrategy {
     PositionComponent pos = posM.get(player);
     HealthComponent health = healthM.get(player);
     health.max /= 2;
-    if(health.current < health.max) {
+    if(health.current > health.max) {
       health.current = health.max;
     }
 
