@@ -51,7 +51,7 @@ public class DeathScreen implements Screen {
     stage.draw();
 
     if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-      game.setScreen(new FirstScreen(game));
+      game.setScreen(new FirstScreen(game, score));
     }
   }
 

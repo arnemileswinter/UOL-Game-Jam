@@ -16,10 +16,12 @@ import de.oul.gamejam.world.LevelFactory;
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
   private final Game game;
+  private final Scoreboard scoreboard;
   private PooledEngine engine;
 
-  public FirstScreen(Game game) {
+  public FirstScreen(Game game, Scoreboard scoreboard) {
     this.game = game;
+    this.scoreboard = scoreboard;
   }
 
   /**
@@ -28,7 +30,7 @@ public class FirstScreen implements Screen {
   @Override
   public void show(){
     World         world         = new World(new Vector2(0, 0), true);
-    EngineFactory engineFactory = new EngineFactory(world, new Scoreboard());
+    EngineFactory engineFactory = new EngineFactory(world, scoreboard == null ? new Scoreboard() : scoreboard);
     engine = engineFactory.createEngine(game);
   }
 
