@@ -15,7 +15,7 @@ public class JamGame extends Game {
   @Override
   public void create(){
     setUpUI();
-    setScreen(new FirstScreen(this));
+    setScreen(new SplashScreen(this));
   }
 
   private void setUpUI(){
