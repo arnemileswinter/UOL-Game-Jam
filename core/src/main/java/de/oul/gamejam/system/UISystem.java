@@ -29,7 +29,7 @@ public class UISystem extends EntitySystem {
     this.worldCamera = worldCamera;
     this.entitiesWithHealthBars = Family
             .all(HealthComponent.class, PositionComponent.class)
-            .exclude(PlayerComponent.class)
+            .exclude(FocusedComponent.class)
             .get();
     positionedLabels = Family.all(PositionComponent.class, LabelComponent.class).get();
   }

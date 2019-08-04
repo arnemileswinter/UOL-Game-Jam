@@ -3,6 +3,7 @@ package de.oul.gamejam.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import de.oul.gamejam.component.FocusedComponent;
 import de.oul.gamejam.component.HealthComponent;
 import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.ui.HealthBar;
@@ -27,7 +28,7 @@ public class HealthBarSystem extends IteratingSystem {
     HealthComponent healthComponent = entity.getComponent(HealthComponent.class);
 
     // align UI with player health
-    if(entity.getComponent(PlayerComponent.class) != null) {
+    if(entity.getComponent(FocusedComponent.class) != null) {
       healthBar.setHealth(healthComponent.current, healthComponent.max);
       return;
     }

@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import de.oul.gamejam.Scoreboard;
 import de.oul.gamejam.component.EnemyComponent;
+import de.oul.gamejam.component.FocusedComponent;
 import de.oul.gamejam.component.HealthComponent;
 import de.oul.gamejam.component.ToRemoveComponent;
 
@@ -12,7 +13,7 @@ public class EnemyDeathSystem extends IteratingSystem {
   private final Scoreboard scoreboard;
 
   public EnemyDeathSystem(Scoreboard scoreboard){
-    super(Family.all(EnemyComponent.class, HealthComponent.class).exclude(ToRemoveComponent.class).get());
+    super(Family.all(HealthComponent.class).exclude(ToRemoveComponent.class, FocusedComponent.class).get());
     this.scoreboard = scoreboard;
   }
 

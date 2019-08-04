@@ -8,7 +8,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import de.oul.gamejam.entity.BulletFactory;
+import de.oul.gamejam.entity.PlayerFactory;
+import de.oul.gamejam.entity.PowerupFactory;
 import de.oul.gamejam.entity.PowerupLabelFactory;
+import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
@@ -37,6 +40,10 @@ public class EngineFactory {
 
     PooledEngine pooledEngine = new PooledEngine();
 
+    // add player.
+    PlayerFactory playerFactory = new PlayerFactory(pooledEngine, world);
+    playerFactory.createPlayer(5, 5);
+
     // add systems.
 
     // housekeeping
@@ -60,6 +67,9 @@ public class EngineFactory {
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
     pooledEngine.addSystem(new BulletHurtSystem());
+
+    PowerupFactory powerupFactory = new PowerupFactory(pooledEngine, world, new RandomPowerUpEffectProvider(pooledEngine, playerFactory));
+    pooledEngine.addSystem(new PowerupSpawnSystem(powerupFactory));
     pooledEngine.addSystem(new PowerupSystem(new PowerupLabelFactory(pooledEngine)));
 
     // add physics systems.

@@ -2,7 +2,10 @@ package de.oul.gamejam.powerups.buffs;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.PooledEngine;
 import de.oul.gamejam.component.HealthComponent;
+import de.oul.gamejam.component.PlayerComponent;
 import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.ShootingComponent;
 import de.oul.gamejam.entity.PlayerFactory;
@@ -13,9 +16,14 @@ public class SecondPlayerBuff implements BuffStrategy {
   private final ComponentMapper<HealthComponent>   healthM = ComponentMapper.getFor(HealthComponent.class);
 
   private final PlayerFactory                      playerFactory;
+  private final PooledEngine engine;
+  private final Family playerFamily;
+  private boolean enabled;
 
-  public SecondPlayerBuff(PlayerFactory playerFactory) {
+  public SecondPlayerBuff(PlayerFactory playerFactory, PooledEngine engine) {
     this.playerFactory = playerFactory;
+    this.engine = engine;
+    this.playerFamily = Family.all(PlayerComponent.class).get();
   }
 
   /**
@@ -23,11 +31,21 @@ public class SecondPlayerBuff implements BuffStrategy {
    */
   @Override
   public String name(){
-    return "Twice the fun!";
+    if(enabled) {
+      return "Twice the fun!";
+    } else {
+      return "There are too many!";
+    }
   }
 
   @Override
   public void buff(Entity player){
+    if(engine.getEntitiesFor(playerFamily).size() > 20) {
+      this.enabled = false;
+      return;
+    }
+    this.enabled = true;
+
     PositionComponent pos = posM.get(player);
     HealthComponent health = healthM.get(player);
     health.max /= 2;

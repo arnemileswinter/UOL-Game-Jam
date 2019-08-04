@@ -1,6 +1,7 @@
 package de.oul.gamejam.powerups;
 
 
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.utils.Array;
 import de.oul.gamejam.entity.PlayerFactory;
 import de.oul.gamejam.powerups.buffs.*;
@@ -11,7 +12,7 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
   private Array<BuffStrategy> buffs;
   private Array<NerfStrategy> nerfs;
 
-  public RandomPowerUpEffectProvider(PlayerFactory playerFactory) {
+  public RandomPowerUpEffectProvider(PooledEngine engine, PlayerFactory playerFactory) {
     this.buffs = new Array<>();
     this.nerfs = new Array<>();
 
@@ -20,7 +21,7 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
             new HealBuff(),
             new MoreBulletDamageBuff(),
             new MoreLifeBuff(),
-            new SecondPlayerBuff(playerFactory)
+            new SecondPlayerBuff(playerFactory, engine)
     );
     nerfs.addAll(
             new LessHealthBuff()

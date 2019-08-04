@@ -14,6 +14,8 @@ import de.oul.gamejam.component.*;
 
 public class InputSystem extends IteratingSystem implements InputProcessor {
 
+    private final ComponentMapper<ShootingComponent> shootingM = ComponentMapper.getFor(ShootingComponent.class);
+
     public InputSystem() {
         super(Family.all(PositionComponent.class, PlayerComponent.class).get());
         Gdx.input.setInputProcessor(this);
@@ -33,8 +35,8 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         position.x += velocity.x*diagonalSpeed;
         position.y += velocity.y*diagonalSpeed;
 
-
-
+        ShootingComponent shooting = shootingM.get(entity);
+        shooting.isShooting = Gdx.input.isKeyPressed(Input.Keys.ENTER);
     }
 
     @Override
@@ -54,9 +56,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             }else if(Input.Keys.A == keycode){
                 velocity.x += -1;
                 view.changeView(View.Left);
-            } else if (Input.Keys.ENTER == keycode) {
-                ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
-                shootingComponent.isShooting = true;
             }
         }
 
@@ -83,10 +82,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
         }else if(Input.Keys.A == keycode){
             velocity.x = 0;
             view.changeView(View.Left);
-        }
-        if (Input.Keys.ENTER == keycode) {
-            ShootingComponent shootingComponent = player.getComponent(ShootingComponent.class);
-            shootingComponent.isShooting = false;
         }
         return false;
     }
