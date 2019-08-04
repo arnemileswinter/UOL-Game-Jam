@@ -39,6 +39,8 @@ public class LevelFactory {
         }
         if (!bottomDoor && !leftDoor && !rightDoor && !topDoor) {
           topDoor = true;
+        }
+        if(!leftDoor && !rightDoor && !topDoor){
           rightDoor = true;
         }
         if (y == 0) {
