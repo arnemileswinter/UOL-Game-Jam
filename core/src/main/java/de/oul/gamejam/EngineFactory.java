@@ -45,7 +45,7 @@ public class EngineFactory {
     PooledEngine pooledEngine = new PooledEngine();
 
     // Game rules
-    pooledEngine.addSystem(new GoalSystem(game));
+    pooledEngine.addSystem(new GoalSystem(game, scoreboard));
 
     PlayerBuffer playerBuffer = new PlayerBuffer();
     pooledEngine.addSystem(new PlayerListener(playerBuffer));
