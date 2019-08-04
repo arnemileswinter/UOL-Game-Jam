@@ -7,7 +7,7 @@ import de.oul.gamejam.component.PhysicsComponent;
 /**
  * Steps the box2d physics world and thus runs the simulation.
  */
-public class PhysicsSystem extends EntitySystem implements EntityListener {
+public class PhysicsSystem extends EntitySystem {
   /** How long a step might take. */
   private static final float MAX_STEP_TIME       = 1 / 45f;
   /** How accurate velocity simulations are. */
@@ -38,37 +38,5 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
       this.world.step(MAX_STEP_TIME, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
       accumulator -= MAX_STEP_TIME;
     }
-  }
-
-  /**
-   * Add this system as a listener to entities with a physics component.
-   *
-   * @param engine The engine that is maintaining the ECS.
-   */
-  @Override
-  public void addedToEngine(Engine engine){
-    super.addedToEngine(engine);
-    engine.addEntityListener(Family.all(PhysicsComponent.class).get(), this);
-  }
-
-  /**
-   * Called when an entity with a physics body is added to the engine. Teaches the box2d physics engine that a body is
-   * associated with an entity.
-   *
-   * @param entity The entity that is to have physics.
-   */
-  @Override
-  public void entityAdded(Entity entity){
-  }
-
-  /**
-   * Destroy the physics body associated with this entity. Called when an entity with a physics component is removed
-   * from the engine.
-   *
-   * @param entity The entity that has physics.
-   */
-  @Override
-  public void entityRemoved(Entity entity){
-    world.destroyBody(entity.getComponent(PhysicsComponent.class).body);
   }
 }

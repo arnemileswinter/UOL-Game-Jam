@@ -1,6 +1,7 @@
 package de.oul.gamejam;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,18 +31,22 @@ public class EngineFactory {
   /**
    * The box2d Physics world
    */
-  private final World world;
+  private final World      world;
   private final Scoreboard scoreboard;
 
-    public EngineFactory(World world, Scoreboard scoreboard){
+  public EngineFactory(World world, Scoreboard scoreboard){
     this.scoreboard = scoreboard;
     this.world = world;
   }
 
-  public PooledEngine createEngine() {
+  public PooledEngine createEngine(Game game){
     Camera camera = new OrthographicCamera();
 
     PooledEngine pooledEngine = new PooledEngine();
+
+    // Game rules
+    pooledEngine.addSystem(new GoalSystem(game));
+
     PlayerBuffer playerBuffer = new PlayerBuffer();
     pooledEngine.addSystem(new PlayerListener(playerBuffer));
     // add player.
@@ -75,7 +80,9 @@ public class EngineFactory {
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world), enemyFactory));
     pooledEngine.addSystem(new BulletHurtSystem());
 
-    PowerupFactory powerupFactory = new PowerupFactory(pooledEngine, world, new RandomPowerUpEffectProvider(pooledEngine, playerFactory));
+    PowerupFactory powerupFactory = new PowerupFactory(pooledEngine,
+                                                       world,
+                                                       new RandomPowerUpEffectProvider(pooledEngine, playerFactory));
     pooledEngine.addSystem(new PowerupSpawnSystem(powerupFactory));
     pooledEngine.addSystem(new PowerupSystem(new PowerupLabelFactory(pooledEngine)));
 
@@ -90,7 +97,7 @@ public class EngineFactory {
 
     // add UI
     HealthBar healthBar = new HealthBar();
-    UI ui = new UI(healthBar, scoreboard);
+    UI        ui        = new UI(healthBar, scoreboard);
     ui.setFillParent(true);
 
     pooledEngine.addSystem(new HealthBarSystem(healthBar));

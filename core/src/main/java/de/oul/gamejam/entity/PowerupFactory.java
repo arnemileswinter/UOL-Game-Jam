@@ -68,6 +68,7 @@ public class PowerupFactory {
     CircleShape shape = new CircleShape();
     shape.setRadius(0.5f);
     fixtureDef.shape = shape;
+    fixtureDef.isSensor = true;
 
     Body body = world.createBody(bodyDef);
     body.createFixture(fixtureDef);

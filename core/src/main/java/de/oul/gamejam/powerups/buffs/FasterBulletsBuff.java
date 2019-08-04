@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import de.oul.gamejam.component.ShootingComponent;
 import de.oul.gamejam.powerups.BuffStrategy;
 
-public class FasterShootingBuff implements BuffStrategy {
+public class FasterBulletsBuff implements BuffStrategy {
   private final ComponentMapper<ShootingComponent> shootingM = ComponentMapper.getFor(ShootingComponent.class);
 
   /**
@@ -13,12 +13,12 @@ public class FasterShootingBuff implements BuffStrategy {
    */
   @Override
   public String name(){
-    return "Faster shooting!";
+    return "Faster bullets!";
   }
 
   @Override
   public void buff(Entity player){
     ShootingComponent shootingComponent = shootingM.get(player);
-    shootingComponent.shootSpeed -= 0.1 * shootingComponent.shootSpeed;
+    shootingComponent.bulletSpeed += 0.1 * shootingComponent.bulletSpeed;
   }
 }

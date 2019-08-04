@@ -5,10 +5,9 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.World;
-import de.oul.gamejam.component.PositionComponent;
-import de.oul.gamejam.component.SwitchAssetComponent;
-import de.oul.gamejam.component.TextureComponent;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.physics.box2d.*;
+import de.oul.gamejam.component.*;
 
 public class GoalFactory implements SpawnInterface{
 
@@ -41,7 +40,33 @@ public class GoalFactory implements SpawnInterface{
         switchAssetComponent.max=2;
         goal.add(switchAssetComponent);
 
+        GoalComponent goalComponent = engine.createComponent(GoalComponent.class);
+        goal.add(goalComponent);
+
+        PhysicsComponent physicsComponent = engine.createComponent(PhysicsComponent.class);
+        physicsComponent.body = createGoalBody(x,y);
+        physicsComponent.body.setUserData(goal);
+        goal.add(physicsComponent);
+
         engine.addEntity(goal);
         return goal;
+    }
+
+    private Body createGoalBody(int x, int y){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(x,y);
+
+        Body body = world.createBody(bodyDef);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.isSensor = true;
+        CircleShape shape = new CircleShape();
+        shape.setRadius(0.5f);
+        fixtureDef.shape = shape;
+
+        body.createFixture(fixtureDef);
+        shape.dispose();
+
+        return body;
     }
 }
