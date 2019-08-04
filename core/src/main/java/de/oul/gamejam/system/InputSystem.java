@@ -14,6 +14,9 @@ import de.oul.gamejam.component.*;
 
 public class InputSystem extends IteratingSystem implements InputProcessor {
 
+    ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
+    ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
+
     public InputSystem() {
         super(Family.all(PositionComponent.class, PlayerComponent.class).get());
         Gdx.input.setInputProcessor(this);
@@ -21,11 +24,11 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     protected void processEntity(Entity entity, float v) {
-        Vector2 position = entity.getComponent(PositionComponent.class).vector;
-        Vector2 velocity = entity.getComponent(VelocityComponent.class).vector;
+        Vector2 position = pm.get(entity).vector;
+        Vector2 velocity = vm.get(entity).vector;
 
 
-        float speed = entity.getComponent(VelocityComponent.class).speed;
+        float speed = vm.get(entity).speed;
         float diagonalSpeed = speed;
         if(velocity.x != 0 && velocity.y !=0  ){
             diagonalSpeed = diagonalSpeed /2;

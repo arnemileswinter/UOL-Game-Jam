@@ -8,14 +8,16 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import de.oul.gamejam.entity.BulletFactory;
+import de.oul.gamejam.entity.MapTileFactory;
 import de.oul.gamejam.entity.PowerupLabelFactory;
 import de.oul.gamejam.system.*;
-import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
+import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.PhysicsDebugRenderSystem;
 import de.oul.gamejam.system.physics.PhysicsSystem;
 import de.oul.gamejam.ui.HealthBar;
 import de.oul.gamejam.ui.UI;
+import de.oul.gamejam.world.LevelFactory;
 
 /**
  * Initializes the engine with all its required systems.
@@ -27,7 +29,7 @@ public class EngineFactory {
   private final World world;
   private final Scoreboard scoreboard;
 
-  public EngineFactory(World world, Scoreboard scoreboard){
+    public EngineFactory(World world, Scoreboard scoreboard){
     this.scoreboard = scoreboard;
     this.world = world;
   }
@@ -54,7 +56,9 @@ public class EngineFactory {
 
     // Enemy Systems
     pooledEngine.addSystem(new EnemyDeathSystem(scoreboard));
-    pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
+    LevelFactory levelFactory = new LevelFactory(new MapTileFactory(pooledEngine, world));
+    levelFactory.createLevel();
+    pooledEngine.addSystem(new SpawnSystem(pooledEngine,world,levelFactory));
     pooledEngine.addSystem(new MoveEnemySystem());
 
     // combat

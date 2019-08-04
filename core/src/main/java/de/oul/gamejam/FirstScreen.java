@@ -26,10 +26,7 @@ public class FirstScreen implements Screen {
     engine = engineFactory.createEngine();
     PlayerFactory playerFactory = new PlayerFactory(engine, world);
     playerFactory.createPlayer(5, 5);
-    LevelFactory levelFactory = new LevelFactory(new MapTileFactory(engine, world));
-    levelFactory.createLevel();
     PowerupFactory powerupFactory = new PowerupFactory(engine, world, new RandomPowerUpEffectProvider(playerFactory));
-
     powerupFactory.create(7, 5);
 
   }

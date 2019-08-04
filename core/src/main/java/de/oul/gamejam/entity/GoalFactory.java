@@ -10,7 +10,7 @@ import de.oul.gamejam.component.PositionComponent;
 import de.oul.gamejam.component.SwitchAssetComponent;
 import de.oul.gamejam.component.TextureComponent;
 
-public class GoalFactory {
+public class GoalFactory implements SpawnInterface{
 
     private final PooledEngine engine;
     private final TextureRegion textureRegion;
@@ -22,7 +22,8 @@ public class GoalFactory {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("GoalEntry1.png")));
     }
 
-    public Entity createGoal(float x, float y){
+    @Override
+    public Entity spawn(int x, int y){
         Entity goal = engine.createEntity();
 
         // Give the player a position.

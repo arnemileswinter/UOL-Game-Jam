@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import de.oul.gamejam.component.*;
 
-public class EnemyFactory {
+public class EnemyFactory  implements SpawnInterface {
     /** The pool to create entities and components with. */
     private final PooledEngine engine;
     /** The texture to apply to the player. */
@@ -25,7 +25,9 @@ public class EnemyFactory {
 
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("RobotDown.png")));
     }
-    public Entity createEnemy(int x, int y) {
+
+    @Override
+    public Entity spawn(int x, int y) {
         Entity enemy = engine.createEntity();
 
         // Give the enemy a position.
