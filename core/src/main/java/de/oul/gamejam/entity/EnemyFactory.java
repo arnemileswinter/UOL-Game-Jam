@@ -8,13 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import de.oul.gamejam.component.*;
 
+import java.util.Random;
+
 public class EnemyFactory  implements SpawnInterface {
     /** The pool to create entities and components with. */
-    private final PooledEngine engine;
-    /** The texture to apply to the player. */
-    private final TextureRegion textureRegion;
+    private final PooledEngine  engine;
     /** The box2d physics world. */
-    private final World world;
+    private final World         world;
+
+    private final Random random;
 
     /**
      * @param engine The pool to create components with.
@@ -23,7 +25,7 @@ public class EnemyFactory  implements SpawnInterface {
         this.engine = engine;
         this.world = world;
 
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("RobotDown.png")));
+        random = new Random();
     }
 
     @Override
@@ -37,7 +39,6 @@ public class EnemyFactory  implements SpawnInterface {
 
         // Give the enemy a texture.
         TextureComponent texture = engine.createComponent(TextureComponent.class);
-        texture.textureRegion = textureRegion;
         enemy.add(texture);
 
         // Give the enemy physics.
@@ -68,6 +69,13 @@ public class EnemyFactory  implements SpawnInterface {
         viewComponent.assetString ="Robot";
         enemy.add(viewComponent);
 
+        if (random.nextFloat() < 0.25f) {
+            // enemy follows player
+            enemy.add(engine.createComponent(FollowPlayerComponent.class));
+            viewComponent.assetString = "Shroom";
+        } else {
+            enemy.add(engine.createComponent(WalkAroundComponent.class));
+        }
 
         // Add the enemy to the engine.
         engine.addEntity(enemy);
