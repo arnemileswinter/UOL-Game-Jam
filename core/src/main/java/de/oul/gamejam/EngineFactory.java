@@ -18,7 +18,6 @@ import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
-import de.oul.gamejam.system.physics.PhysicsDebugRenderSystem;
 import de.oul.gamejam.system.physics.PhysicsSystem;
 import de.oul.gamejam.ui.HealthBar;
 import de.oul.gamejam.ui.UI;
@@ -75,7 +74,8 @@ public class EngineFactory {
     LevelFactory levelFactory = new LevelFactory(new MapTileFactory(pooledEngine, world));
     levelFactory.createLevel();
     pooledEngine.addSystem(new SpawnSystem(levelFactory, enemyFactory));
-    pooledEngine.addSystem(new MoveEnemySystem());
+    pooledEngine.addSystem(new EnemiesWalkAroundSystem());
+    pooledEngine.addSystem(new EnemiesFollowPlayerSystem());
 
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world), enemyFactory));

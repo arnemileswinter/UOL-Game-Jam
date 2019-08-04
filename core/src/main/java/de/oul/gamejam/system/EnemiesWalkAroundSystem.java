@@ -6,22 +6,19 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import de.oul.gamejam.View;
-import de.oul.gamejam.component.EnemyComponent;
-import de.oul.gamejam.component.PositionComponent;
-import de.oul.gamejam.component.VelocityComponent;
-import de.oul.gamejam.component.ViewComponent;
+import de.oul.gamejam.component.*;
 
 import java.util.Random;
 
-public class MoveEnemySystem extends IteratingSystem {
+public class EnemiesWalkAroundSystem extends IteratingSystem {
     ComponentMapper<EnemyComponent> em = ComponentMapper.getFor(EnemyComponent.class);
     ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
     ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
     Random random = new Random();
 
 
-    public MoveEnemySystem() {
-        super(Family.all(EnemyComponent.class, VelocityComponent.class, PositionComponent.class).get());
+    public EnemiesWalkAroundSystem() {
+        super(Family.all(EnemyComponent.class, VelocityComponent.class, PositionComponent.class, WalkAroundComponent.class).get());
     }
 
     @Override
