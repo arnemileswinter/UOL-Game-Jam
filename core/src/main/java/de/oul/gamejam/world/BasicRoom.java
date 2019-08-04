@@ -39,15 +39,4 @@ public class BasicRoom extends Room {
       room[9][5] = false;
     }
   }
-
-  private void displayMatrix(int N, boolean[][] mat){
-    for (int i = 0; i < N; i++) {
-      for (int j = 0; j < N; j++)
-        System.out.print(" " + mat[i][j]);
-
-      System.out.print("\n");
-    }
-    System.out.print("\n");
-  }
-
 }

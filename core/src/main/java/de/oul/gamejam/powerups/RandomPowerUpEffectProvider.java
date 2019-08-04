@@ -16,6 +16,7 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
     this.buffs = new Array<>();
     this.nerfs = new Array<>();
 
+
     buffs.addAll(
             new FasterWalkingBuff(),
             new FasterBulletsBuff(),

@@ -69,10 +69,18 @@ public class EnemyFactory  implements SpawnInterface {
         viewComponent.assetString ="Robot";
         enemy.add(viewComponent);
 
-        if (random.nextFloat() < 0.25f) {
+        float r = random.nextFloat();
+
+        if (r < 0.25f) {
             // enemy follows player
             enemy.add(engine.createComponent(FollowPlayerComponent.class));
             viewComponent.assetString = "Shroom";
+        } else if(r < 0.5f) {
+            enemy.add(engine.createComponent(FollowPlayerComponent.class));
+            viewComponent.assetString = "Brain";
+            healthComponent.max = 200;
+            healthComponent.current = 200;
+            shootingComponent.bulletDamage += 30;
         } else {
             enemy.add(engine.createComponent(WalkAroundComponent.class));
         }

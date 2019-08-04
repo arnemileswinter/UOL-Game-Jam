@@ -56,7 +56,11 @@ public class ViewSystem extends IteratingSystem {
       case Right:
         cached = textureCache.get(assetString + "Right");
         if (cached == null) {
-          cached = new TextureRegion(new Texture(Gdx.files.internal(assetString + "Right.png")));
+          try{
+            cached = new TextureRegion(new Texture(Gdx.files.internal(assetString + "Right.png")));
+          } catch (Exception e) {
+            return;
+          }
           textureCache.put(assetString + "Right", cached);
         }
         tex.textureRegion = cached;

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import de.oul.gamejam.View;
 import de.oul.gamejam.component.*;
 
 import java.util.Random;
@@ -41,5 +42,19 @@ public class EnemiesFollowPlayerSystem extends IteratingSystem {
     VelocityComponent enemyVelocity  = vm.get(enemy);
 
     enemyVelocity.vector.set(playerPosition.vector).sub(enemyPosition.vector).setLength(enemyVelocity.speed * 10);
+
+    float viewAngle = enemyVelocity.vector.angle();
+
+    ViewComponent viewComponent = enemy.getComponent(ViewComponent.class);
+    if(viewComponent == null) return;
+    if(viewAngle < 45){
+      viewComponent.view = View.Right;
+    } else if (viewAngle < 90 + 45) {
+      viewComponent.view = View.Up;
+    } else if (viewAngle < 90 + 90 + 45) {
+      viewComponent.view = View.Left;
+    } else {
+      viewComponent.view = View.Down;
+    }
   }
 }

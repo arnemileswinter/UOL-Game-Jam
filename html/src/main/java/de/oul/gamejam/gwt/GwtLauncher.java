@@ -3,7 +3,7 @@ package de.oul.gamejam.gwt;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import de.oul.gamejam.Game;
+import de.oul.gamejam.JamGame;
 
 /** Launches the GWT application. */
 public class GwtLauncher extends GwtApplication {
@@ -15,6 +15,6 @@ public class GwtLauncher extends GwtApplication {
 
     @Override
     public ApplicationListener createApplicationListener() {
-        return new Game();
+        return new JamGame();
     }
 }
