@@ -32,7 +32,7 @@ public class IntroScreen implements Screen {
     table.row();
     table.add(new VisLabel());
     table.row();
-    table.add(new VisLabel("Move with WASD."));
+    table.add(new VisLabel("Move with W, A, S, D."));
     table.row();
     table.add(new VisLabel("Shoot by holding ENTER."));
     table.row();
@@ -41,6 +41,8 @@ public class IntroScreen implements Screen {
     table.add(new VisLabel());
     table.row();
     table.add(new VisLabel("Find your way into the hole, to get deeper in the system!"));
+    table.row();
+    table.add(new VisLabel("But be prepared enemys all around you and nothing is as it seems"));
     table.row();
     table.add(new VisLabel("Press ENTER to continue."));
     table.setFillParent(true);
