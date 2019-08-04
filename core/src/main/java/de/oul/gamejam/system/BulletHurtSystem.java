@@ -4,12 +4,21 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import de.oul.gamejam.component.*;
 
 public class BulletHurtSystem extends IteratingSystem {
 
+  private final Sound playerHitSound;
+  private final Sound robotHit;
+
   public BulletHurtSystem(){
     super(Family.all(BulletComponent.class, PhysicsComponent.class).get());
+
+    playerHitSound = Gdx.audio.newSound(Gdx.files.internal("SoundsOGG/playerHit.ogg"));
+    robotHit = Gdx.audio.newSound(Gdx.files.internal("SoundsOGG/robotHit.ogg"));
+
   }
 
   /**
@@ -26,7 +35,13 @@ public class BulletHurtSystem extends IteratingSystem {
 
     BulletComponent bulletComponent = bullet.getComponent(BulletComponent.class);
 
-
+    if(physicsComponent.colliding.getComponent(PlayerComponent.class) != null) {
+      playerHitSound.play(0.4f);
+    } else if(physicsComponent.colliding.getComponent(EnemyComponent.class) != null) {
+      if(bulletComponent.owner.getComponent(PlayerComponent.class) != null) {
+        robotHit.play(0.4f);
+      }
+    }
 
     HealthComponent enemyHealth = physicsComponent.colliding.getComponent(HealthComponent.class);
     if (enemyHealth != null && bulletComponent.owner.getComponent(ShootingComponent.class) != null){
