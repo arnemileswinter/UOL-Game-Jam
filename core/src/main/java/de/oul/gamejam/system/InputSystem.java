@@ -59,6 +59,13 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
             }else if(Input.Keys.A == keycode){
                 velocity.x += -1;
                 view.changeView(View.Left);
+            }else if(Input.Keys.TAB == keycode){
+                Entity entity = null;
+                for(Entity Vplayer:getEngine().getEntitiesFor(Family.all(FocusedComponent.class).get())){
+                    entity = Vplayer;
+                }
+                getEngine().getSystem(CameraFocusPlayerSystem.class).changePlayer(entity);
+
             }
         }
 
