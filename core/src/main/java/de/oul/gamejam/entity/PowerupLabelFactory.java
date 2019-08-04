@@ -31,7 +31,7 @@ public class PowerupLabelFactory {
     entity.add(label);
 
     DelayedRemove delayedRemove = engine.createComponent(DelayedRemove.class);
-    delayedRemove.lifeTime = 2;
+    delayedRemove.lifeTime = 4;
     entity.add(delayedRemove);
 
     engine.addEntity(entity);
