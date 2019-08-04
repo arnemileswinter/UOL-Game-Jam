@@ -21,9 +21,8 @@ public class Lwjgl3Launcher {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new JFXPanel(); // this will prepare JavaFX toolkit and environment
+            new JFXPanel();
             Platform.runLater(() -> {
-
                 List<String> choices = new ArrayList<>();
                 choices.add("1600 x 900");
                 choices.add("1400 x 900");
@@ -35,7 +34,6 @@ public class Lwjgl3Launcher {
                 dialog.setHeaderText("Welcome");
                 dialog.setContentText("Choose your Resolution:");
 
-// Traditional way to get the response value.
                 Optional<String> result = dialog.showAndWait();
                 if (result.isPresent()) {
                     switch (result.get()) {
@@ -58,8 +56,6 @@ public class Lwjgl3Launcher {
                     }
                     createApplication();
                 }
-
-// The Java 8 way to get the response value (with lambda expression)..add("1280 x 800");
             });
         });
         //createApplication();
