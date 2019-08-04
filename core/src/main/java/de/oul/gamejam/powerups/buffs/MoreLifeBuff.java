@@ -10,6 +10,14 @@ import de.oul.gamejam.powerups.BuffStrategy;
 public class MoreLifeBuff implements BuffStrategy {
   private final ComponentMapper<HealthComponent> healthM = ComponentMapper.getFor(HealthComponent.class);
 
+  /**
+   * @return The title of the buff to be displayed.
+   */
+  @Override
+  public String name(){
+    return "Max Life +20%";
+  }
+
   @Override
   public void buff(Entity player){
     HealthComponent health = healthM.get(player);

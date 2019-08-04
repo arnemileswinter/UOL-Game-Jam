@@ -18,6 +18,14 @@ public class SecondPlayerBuff implements BuffStrategy {
     this.playerFactory = playerFactory;
   }
 
+  /**
+   * @return The title of the buff to be displayed.
+   */
+  @Override
+  public String name(){
+    return "Twice the fun!";
+  }
+
   @Override
   public void buff(Entity player){
     PositionComponent pos = posM.get(player);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import de.oul.gamejam.entity.BulletFactory;
+import de.oul.gamejam.entity.PowerupLabelFactory;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
 import de.oul.gamejam.system.physics.AlignDataWithPhysicsSystem;
@@ -39,6 +40,7 @@ public class EngineFactory {
     // add systems.
 
     // housekeeping
+    pooledEngine.addSystem(new DelayedRemoval());
     pooledEngine.addSystem(new ToRemoveSystem());
 
     // visibility
@@ -58,7 +60,7 @@ public class EngineFactory {
     // combat
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
     pooledEngine.addSystem(new BulletHurtSystem());
-    pooledEngine.addSystem(new PowerupSystem());
+    pooledEngine.addSystem(new PowerupSystem(new PowerupLabelFactory(pooledEngine)));
 
     // add physics systems.
     world.setContactListener(new EntityCollisionListener());

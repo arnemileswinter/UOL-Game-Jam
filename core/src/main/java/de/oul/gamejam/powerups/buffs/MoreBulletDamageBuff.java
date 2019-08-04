@@ -8,6 +8,14 @@ import de.oul.gamejam.powerups.BuffStrategy;
 public class MoreBulletDamageBuff implements BuffStrategy {
   private final ComponentMapper<ShootingComponent> shootingM = ComponentMapper.getFor(ShootingComponent.class);
 
+  /**
+   * @return The title of the buff to be displayed.
+   */
+  @Override
+  public String name(){
+    return "Damage +10";
+  }
+
   @Override
   public void buff(Entity player){
     ShootingComponent shootingComponent = shootingM.get(player);

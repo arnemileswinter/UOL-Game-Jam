@@ -8,6 +8,14 @@ import de.oul.gamejam.powerups.NerfStrategy;
 public class LessHealthBuff implements NerfStrategy {
   ComponentMapper<HealthComponent> healthMapper = ComponentMapper.getFor(HealthComponent.class);
 
+  /**
+   * @return The title of the nerf to be displayed.
+   */
+  @Override
+  public String name(){
+    return "max life -10%";
+  }
+
   @Override
   public void nerf(Entity player){
     HealthComponent health = healthMapper.get(player);
