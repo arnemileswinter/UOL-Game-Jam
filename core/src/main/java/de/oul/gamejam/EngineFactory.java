@@ -93,7 +93,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new AlignDataWithPhysicsSystem());
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
-    pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
+    // pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
     pooledEngine.addSystem(new ViewSystem());
 
     // add UI

@@ -3,6 +3,7 @@ package de.oul.gamejam;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -32,13 +33,14 @@ public class SplashScreen implements Screen {
    */
   @Override
   public void render(float delta){
+
     spriteBatch.begin();
     spriteBatch.draw(launcherImage, (Gdx.graphics.getWidth()/2f) - (launcherImage.getWidth()/2f), (Gdx.graphics.getHeight()/2f) - (launcherImage.getHeight()/2f));
     spriteBatch.end();
 
     elapsedTime += delta;
     if(elapsedTime > 2f) {
-      game.setScreen(new FirstScreen(game));
+      game.setScreen(new IntroScreen(game));
     }
   }
 
