@@ -28,10 +28,10 @@ public class SwitchAssetSystem extends IteratingSystem {
             switchAssetComponent.switchAsset();
             TextureRegion textureRegion = entity.getComponent(TextureComponent.class).textureRegion;
             String assertString = switchAssetComponent.assetString;
-            Texture texture = textureCache.get(assertString);
+            Texture texture = textureCache.get(assertString + switchAssetComponent.value);
             if(texture == null) {
                 texture = new Texture(Gdx.files.internal(assertString + switchAssetComponent.value + ".png"));
-                textureCache.put(assertString, texture);
+                textureCache.put(assertString + switchAssetComponent.value, texture);
             }
             textureRegion.setTexture(texture);
             this.v = 0f;
