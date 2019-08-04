@@ -1,15 +1,13 @@
 package de.oul.gamejam;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import de.oul.gamejam.entity.BulletFactory;
-import de.oul.gamejam.entity.MapTileFactory;
-import de.oul.gamejam.entity.PowerupLabelFactory;
 import de.oul.gamejam.entity.*;
 import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.system.*;
@@ -28,18 +26,21 @@ public class EngineFactory {
   /**
    * The box2d Physics world
    */
-  private final World world;
+  private final World      world;
   private final Scoreboard scoreboard;
 
-    public EngineFactory(World world, Scoreboard scoreboard){
+  public EngineFactory(World world, Scoreboard scoreboard){
     this.scoreboard = scoreboard;
     this.world = world;
   }
 
-  public PooledEngine createEngine() {
+  public PooledEngine createEngine(Game game){
     Camera camera = new OrthographicCamera();
 
     PooledEngine pooledEngine = new PooledEngine();
+
+    // Game rules
+    pooledEngine.addSystem(new GoalSystem(game));
 
     // add player.
     PlayerFactory playerFactory = new PlayerFactory(pooledEngine, world);
@@ -72,7 +73,9 @@ public class EngineFactory {
     pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world), enemyFactory));
     pooledEngine.addSystem(new BulletHurtSystem());
 
-    PowerupFactory powerupFactory = new PowerupFactory(pooledEngine, world, new RandomPowerUpEffectProvider(pooledEngine, playerFactory));
+    PowerupFactory powerupFactory = new PowerupFactory(pooledEngine,
+                                                       world,
+                                                       new RandomPowerUpEffectProvider(pooledEngine, playerFactory));
     pooledEngine.addSystem(new PowerupSpawnSystem(powerupFactory));
     pooledEngine.addSystem(new PowerupSystem(new PowerupLabelFactory(pooledEngine)));
 
@@ -82,12 +85,12 @@ public class EngineFactory {
     pooledEngine.addSystem(new AlignDataWithPhysicsSystem());
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
-    // pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
+    pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
     pooledEngine.addSystem(new ViewSystem());
 
     // add UI
     HealthBar healthBar = new HealthBar();
-    UI ui = new UI(healthBar, scoreboard);
+    UI        ui        = new UI(healthBar, scoreboard);
     ui.setFillParent(true);
 
     pooledEngine.addSystem(new HealthBarSystem(healthBar));

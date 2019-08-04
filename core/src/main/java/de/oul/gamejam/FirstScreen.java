@@ -1,6 +1,7 @@
 package de.oul.gamejam;
 
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +15,12 @@ import de.oul.gamejam.world.LevelFactory;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
+  private final Game game;
   private PooledEngine engine;
+
+  public FirstScreen(Game game) {
+    this.game = game;
+  }
 
   /**
    * Initialize the game engine and the game world.
@@ -23,7 +29,7 @@ public class FirstScreen implements Screen {
   public void show(){
     World         world         = new World(new Vector2(0, 0), true);
     EngineFactory engineFactory = new EngineFactory(world, new Scoreboard());
-    engine = engineFactory.createEngine();
+    engine = engineFactory.createEngine(game);
   }
 
   /**
