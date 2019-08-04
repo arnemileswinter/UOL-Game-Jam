@@ -1,12 +1,3 @@
-plugins {
-	id 'org.openjfx.javafxplugin' version '0.0.6'
-}
-
-javafx {
-	version = "11.0.2"
-	modules = [ 'javafx.controls', 'javafx.swing' ]
-}
-
 apply plugin: 'application'
 
 sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
