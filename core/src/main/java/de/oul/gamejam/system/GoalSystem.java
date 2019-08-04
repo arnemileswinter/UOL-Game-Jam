@@ -30,6 +30,7 @@ public class GoalSystem extends IteratingSystem {
     if(playerM.has(physics.colliding)) {
       // We have a collision with the goal and the player
       scoreboard.gotGoal();
+      scoreboard.addLevel();
       game.setScreen(new FirstScreen(game, scoreboard));
     }
   }

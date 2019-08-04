@@ -73,7 +73,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new EnemyDeathSystem(scoreboard));
     LevelFactory levelFactory = new LevelFactory(new MapTileFactory(pooledEngine, world));
     levelFactory.createLevel();
-    pooledEngine.addSystem(new SpawnSystem(levelFactory, enemyFactory));
+    pooledEngine.addSystem(new SpawnSystem(levelFactory, enemyFactory, scoreboard.getLevelCount()));
     pooledEngine.addSystem(new EnemiesWalkAroundSystem());
     pooledEngine.addSystem(new EnemiesFollowPlayerSystem());
 
