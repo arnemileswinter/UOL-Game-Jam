@@ -14,7 +14,7 @@ public class SlowerShootingNerf implements NerfStrategy {
    */
   @Override
   public String name(){
-    return "Faster shooting!";
+    return "Slower shooting!";
   }
 
   @Override
