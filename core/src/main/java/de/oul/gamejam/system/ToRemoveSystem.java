@@ -3,6 +3,7 @@ package de.oul.gamejam.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import de.oul.gamejam.component.PhysicsComponent;
 import de.oul.gamejam.component.ToRemoveComponent;
 
 public class ToRemoveSystem extends IteratingSystem {
@@ -22,6 +23,12 @@ public class ToRemoveSystem extends IteratingSystem {
    */
   @Override
   protected void processEntity(Entity entity, float deltaTime){
+    PhysicsComponent physicsComponent = entity.getComponent(PhysicsComponent.class);
+    if(physicsComponent != null) {
+      if(physicsComponent.body != null) {
+        physicsComponent.body.getWorld().destroyBody(physicsComponent.body);
+      }
+    }
     getEngine().removeEntity(entity);
   }
 }

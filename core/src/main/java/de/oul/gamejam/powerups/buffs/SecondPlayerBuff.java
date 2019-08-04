@@ -41,10 +41,10 @@ public class SecondPlayerBuff implements BuffStrategy {
   @Override
   public void buff(Entity player){
     if(engine.getEntitiesFor(playerFamily).size() > 20) {
-      this.enabled = false;
+      enabled = false;
       return;
     }
-    this.enabled = true;
+    enabled = true;
 
     PositionComponent pos = posM.get(player);
     HealthComponent health = healthM.get(player);

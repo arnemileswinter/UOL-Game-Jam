@@ -1,9 +1,7 @@
 package de.oul.gamejam.powerups.buffs;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import de.oul.gamejam.component.DesiredVelocityComponent;
-import de.oul.gamejam.component.ShootingComponent;
+import de.oul.gamejam.component.VelocityComponent;
 import de.oul.gamejam.powerups.BuffStrategy;
 
 public class FasterWalkingBuff implements BuffStrategy {
@@ -17,7 +15,7 @@ public class FasterWalkingBuff implements BuffStrategy {
 
   @Override
   public void buff(Entity player){
-    DesiredVelocityComponent desiredVelocityComponent = player.getComponent(DesiredVelocityComponent.class);
-    desiredVelocityComponent.speed += 0.1f * desiredVelocityComponent.speed;
+    VelocityComponent velocityComponent = player.getComponent(VelocityComponent.class);
+    velocityComponent.speed += 0.1f * velocityComponent.speed;
   }
 }

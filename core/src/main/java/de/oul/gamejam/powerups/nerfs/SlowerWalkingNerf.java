@@ -1,8 +1,7 @@
 package de.oul.gamejam.powerups.nerfs;
 
 import com.badlogic.ashley.core.Entity;
-import de.oul.gamejam.component.DesiredVelocityComponent;
-import de.oul.gamejam.powerups.BuffStrategy;
+import de.oul.gamejam.component.VelocityComponent;
 import de.oul.gamejam.powerups.NerfStrategy;
 
 public class SlowerWalkingNerf implements NerfStrategy {
@@ -16,7 +15,7 @@ public class SlowerWalkingNerf implements NerfStrategy {
 
   @Override
   public void nerf(Entity player){
-    DesiredVelocityComponent desiredVelocityComponent = player.getComponent(DesiredVelocityComponent.class);
-    desiredVelocityComponent.speed -= 0.1f * desiredVelocityComponent.speed;
+    VelocityComponent velocityComponent = player.getComponent(VelocityComponent.class);
+    velocityComponent.speed -= 0.1f * velocityComponent.speed;
   }
 }
