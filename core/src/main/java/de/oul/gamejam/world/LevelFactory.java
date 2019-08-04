@@ -18,7 +18,6 @@ public class LevelFactory {
   public void createLevel(){
     int goalX = createRandomInt();
     int goalY = createRandomInt();
-    System.out.println(goalX +" "+ goalY);
     for (int x = 0; x < 10; x++) {
       for (int y = 9; y >= 0; y--) {
         boolean bottomDoor = randomBoolean();

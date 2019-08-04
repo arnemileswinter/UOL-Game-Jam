@@ -26,6 +26,10 @@ public class IntroScreen implements Screen {
   public void show(){
     stage = new Stage();
     Table table = new Table();
+    table.add(new VisLabel("UOL Game Jam entry by (alphabetically) Arne, Johann, Manuel and Rabea."));
+    table.row();
+    table.add(new VisLabel());
+    table.row();
     table.add(new VisLabel("You are virus in a bad person's body."));
     table.row();
     table.add(new VisLabel("Doctor's have sent Nanobots into the systems to prevent you to dig deeper."));
