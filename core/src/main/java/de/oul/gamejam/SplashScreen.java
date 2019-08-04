@@ -1,37 +1,29 @@
 package de.oul.gamejam;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import de.oul.gamejam.entity.MapTileFactory;
-import de.oul.gamejam.entity.PlayerFactory;
-import de.oul.gamejam.entity.PowerupFactory;
-import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
-import de.oul.gamejam.world.LevelFactory;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /** First screen of the application. Displayed after the application is created. */
-public class FirstScreen implements Screen {
-  private final Game game;
-  private final Scoreboard scoreboard;
-  private PooledEngine engine;
+public class SplashScreen implements Screen {
+  private SpriteBatch spriteBatch;
+  private Texture launcherImage;
+  private float elapsedTime = 0;
 
-  public FirstScreen(Game game, Scoreboard scoreboard) {
-    this.game = game;
-    this.scoreboard = scoreboard;
-  }
+  private Game game;
+
+  public SplashScreen(Game game){this.game = game;}
 
   /**
    * Initialize the game engine and the game world.
    */
   @Override
   public void show(){
-    World         world         = new World(new Vector2(0, 0), true);
-    EngineFactory engineFactory = new EngineFactory(world, scoreboard == null ? new Scoreboard() : scoreboard);
-    engine = engineFactory.createEngine(game);
+    spriteBatch = new SpriteBatch();
+    launcherImage = new Texture(Gdx.files.internal("launcher.png"));
   }
 
   /**
@@ -41,9 +33,15 @@ public class FirstScreen implements Screen {
    */
   @Override
   public void render(float delta){
-    Gdx.gl.glClearColor( 74f / 255f, 17f / 255 ,  17f / 255, 1);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    engine.update(delta);
+
+    spriteBatch.begin();
+    spriteBatch.draw(launcherImage, (Gdx.graphics.getWidth()/2f) - (launcherImage.getWidth()/2f), (Gdx.graphics.getHeight()/2f) - (launcherImage.getHeight()/2f));
+    spriteBatch.end();
+
+    elapsedTime += delta;
+    if(elapsedTime > 2f) {
+      game.setScreen(new IntroScreen(game));
+    }
   }
 
   @Override

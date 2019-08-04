@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import de.oul.gamejam.EntityListener.PlayerBuffer;
+import de.oul.gamejam.EntityListener.PlayerListener;
+import de.oul.gamejam.entity.BulletFactory;
+import de.oul.gamejam.entity.MapTileFactory;
+import de.oul.gamejam.entity.PowerupLabelFactory;
 import de.oul.gamejam.entity.*;
 import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.system.*;
@@ -40,8 +45,10 @@ public class EngineFactory {
     PooledEngine pooledEngine = new PooledEngine();
 
     // Game rules
-    pooledEngine.addSystem(new GoalSystem(game));
+    pooledEngine.addSystem(new GoalSystem(game, scoreboard));
 
+    PlayerBuffer playerBuffer = new PlayerBuffer();
+    pooledEngine.addSystem(new PlayerListener(playerBuffer));
     // add player.
     PlayerFactory playerFactory = new PlayerFactory(pooledEngine, world);
     playerFactory.createPlayer(5, 5);
@@ -58,8 +65,9 @@ public class EngineFactory {
     pooledEngine.addSystem(new SwitchAssetSystem());
 
     // player systems
-    pooledEngine.addSystem(new CameraFocusPlayerSystem(camera));
+    pooledEngine.addSystem(new CameraFocusPlayerSystem(camera, playerBuffer));
     pooledEngine.addSystem(new InputSystem());
+    pooledEngine.addSystem(new PlayerDeathSystem(game, scoreboard));
 
     // Enemy Systems
     EnemyFactory enemyFactory = new EnemyFactory(pooledEngine, world);
@@ -85,7 +93,7 @@ public class EngineFactory {
     pooledEngine.addSystem(new AlignDataWithPhysicsSystem());
     pooledEngine.addSystem(new PhysicsSystem(world));
     pooledEngine.addSystem(new AlignPhysicsWithDataSystem());
-    pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
+    // pooledEngine.addSystem(new PhysicsDebugRenderSystem(world, camera));
     pooledEngine.addSystem(new ViewSystem());
 
     // add UI
