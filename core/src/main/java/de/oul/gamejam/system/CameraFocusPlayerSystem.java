@@ -38,6 +38,10 @@ public class CameraFocusPlayerSystem extends IteratingSystem {
     super.update(deltaTime);
     unmarkOtherPlayersAsFocused();
     focusedPlayer.add(getEngine().createComponent(FocusedComponent.class));
+    if(focusedPlayer== null ||focusedPlayer.getComponent(PositionComponent.class)==null ){
+      changePlayer(focusedPlayer);
+      return;
+    }
     Vector2 playerPosition = focusedPlayer.getComponent(PositionComponent.class).vector;
     camera.position.set(playerPosition.x, playerPosition.y, 0);
   }
@@ -79,8 +83,9 @@ public class CameraFocusPlayerSystem extends IteratingSystem {
     nextPlayer = playerBuffer.getNextPayer();
     while(playerBuffer.list.size() > 1 && nextPlayer == entity){
       nextPlayer = playerBuffer.getNextPayer();
+      lastPlayerFound = false;
     }
-    lastPlayerFound = false;
+
 
   }
 }
