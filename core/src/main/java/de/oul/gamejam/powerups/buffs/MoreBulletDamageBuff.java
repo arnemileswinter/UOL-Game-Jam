@@ -13,7 +13,7 @@ public class MoreBulletDamageBuff implements BuffStrategy {
    */
   @Override
   public String name(){
-    return "Damage +10";
+    return "More damage!";
   }
 
   @Override

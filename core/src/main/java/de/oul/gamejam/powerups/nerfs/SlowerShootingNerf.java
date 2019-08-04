@@ -1,11 +1,12 @@
-package de.oul.gamejam.powerups.buffs;
+package de.oul.gamejam.powerups.nerfs;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import de.oul.gamejam.component.ShootingComponent;
 import de.oul.gamejam.powerups.BuffStrategy;
+import de.oul.gamejam.powerups.NerfStrategy;
 
-public class FasterShootingBuff implements BuffStrategy {
+public class SlowerShootingNerf implements NerfStrategy {
   private final ComponentMapper<ShootingComponent> shootingM = ComponentMapper.getFor(ShootingComponent.class);
 
   /**
@@ -17,8 +18,8 @@ public class FasterShootingBuff implements BuffStrategy {
   }
 
   @Override
-  public void buff(Entity player){
+  public void nerf(Entity player){
     ShootingComponent shootingComponent = shootingM.get(player);
-    shootingComponent.shootSpeed -= 0.1 * shootingComponent.shootSpeed;
+    shootingComponent.shootSpeed += 0.1 * shootingComponent.shootSpeed;
   }
 }

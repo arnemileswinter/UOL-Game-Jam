@@ -15,7 +15,7 @@ public class MoreLifeBuff implements BuffStrategy {
    */
   @Override
   public String name(){
-    return "Max Life +20%";
+    return "More max life!";
   }
 
   @Override

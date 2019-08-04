@@ -13,7 +13,7 @@ public class LessHealthNerf implements NerfStrategy {
    */
   @Override
   public String name(){
-    return "max life -10%";
+    return "Less max health!";
   }
 
   @Override

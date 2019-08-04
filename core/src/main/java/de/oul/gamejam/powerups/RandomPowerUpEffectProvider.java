@@ -7,6 +7,8 @@ import de.oul.gamejam.entity.PlayerFactory;
 import de.oul.gamejam.powerups.buffs.*;
 import de.oul.gamejam.powerups.nerfs.LessHealthNerf;
 import de.oul.gamejam.powerups.nerfs.ShootingCreatesEnemiesNerf;
+import de.oul.gamejam.powerups.nerfs.SlowerBulletsNerf;
+import de.oul.gamejam.powerups.nerfs.SlowerShootingNerf;
 
 public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
 
@@ -18,6 +20,7 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
     this.nerfs = new Array<>();
 
     buffs.addAll(
+            new FasterBulletsBuff(),
             new FasterShootingBuff(),
             new HealBuff(),
             new MoreBulletDamageBuff(),
@@ -26,7 +29,9 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
     );
     nerfs.addAll(
             new LessHealthNerf(),
-            new ShootingCreatesEnemiesNerf(engine)
+            new ShootingCreatesEnemiesNerf(engine),
+            new SlowerBulletsNerf(),
+            new SlowerShootingNerf()
     );
   }
 
