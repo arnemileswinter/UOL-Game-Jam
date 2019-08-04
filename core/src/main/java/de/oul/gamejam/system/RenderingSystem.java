@@ -61,6 +61,8 @@ public class RenderingSystem extends IteratingSystem {
 
     PositionComponent position = pm.get(entity);
 
+    if(texture.textureRegion == null) return;
+
     float width  = texture.textureRegion.getRegionWidth();
     float height = texture.textureRegion.getRegionHeight();
 

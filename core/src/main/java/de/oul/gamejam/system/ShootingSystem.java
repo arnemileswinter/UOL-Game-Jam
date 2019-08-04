@@ -3,21 +3,23 @@ package de.oul.gamejam.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import de.oul.gamejam.component.PositionComponent;
-import de.oul.gamejam.component.ShootingComponent;
-import de.oul.gamejam.component.ShootingCreatesEnemiesComponent;
-import de.oul.gamejam.component.ViewComponent;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import de.oul.gamejam.component.*;
 import de.oul.gamejam.entity.BulletFactory;
 import de.oul.gamejam.entity.EnemyFactory;
 
 public class ShootingSystem extends IteratingSystem {
   private final BulletFactory bulletFactory;
+  private final Sound sound;
   private       EnemyFactory  enemyFactory;
 
   public ShootingSystem(BulletFactory bulletFactory, EnemyFactory enemyFactory){
     super(Family.all(ShootingComponent.class, PositionComponent.class).get());
     this.bulletFactory = bulletFactory;
     this.enemyFactory = enemyFactory;
+
+    sound = Gdx.audio.newSound(Gdx.files.internal("SoundsOGG/playerShoot.ogg"));
   }
 
   @Override
@@ -33,6 +35,10 @@ public class ShootingSystem extends IteratingSystem {
     PositionComponent positionComponent = entity.getComponent(PositionComponent.class);
 
     ViewComponent viewComponent = entity.getComponent(ViewComponent.class);
+
+    if(entity.getComponent(PlayerComponent.class) != null) {
+      sound.play(0.4f);
+    }
 
     shootingComponent.timeSinceLastShot -= shootingComponent.shootSpeed;
     if(entity.getComponent(ShootingCreatesEnemiesComponent.class) == null) {
