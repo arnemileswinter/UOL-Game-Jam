@@ -26,8 +26,9 @@ public class BulletHurtSystem extends IteratingSystem {
 
     BulletComponent bulletComponent = bullet.getComponent(BulletComponent.class);
 
+    
     HealthComponent enemyHealth = physicsComponent.colliding.getComponent(HealthComponent.class);
-    if (enemyHealth != null){
+    if (enemyHealth != null && bulletComponent.owner.getComponent(ShootingComponent.class) != null){
       float damage = bulletComponent.owner.getComponent(ShootingComponent.class).bulletDamage;
       enemyHealth.current -= damage;
     }
