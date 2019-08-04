@@ -57,7 +57,6 @@ public abstract class Room {
         Random random = new Random();
         if(spawnInterface instanceof GoalFactory) {
             spawnInterface.spawn(x, y);
-            spawnInterface.spawn(5,4);
         }else if (spawnInterface instanceof EnemyFactory){
             while(room[x][y]){
                 x = random.nextInt(9);

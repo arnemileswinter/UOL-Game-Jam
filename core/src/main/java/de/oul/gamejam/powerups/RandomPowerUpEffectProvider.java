@@ -17,12 +17,12 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
     this.nerfs = new Array<>();
 
     buffs.addAll(
-            //new FasterWalkingBuff(),
-            //new FasterBulletsBuff(),
-            //new FasterShootingBuff(),
-            //new HealBuff(),
-            //new MoreBulletDamageBuff(),
-            //new MoreLifeBuff(),
+            new FasterWalkingBuff(),
+            new FasterBulletsBuff(),
+            new FasterShootingBuff(),
+            new HealBuff(),
+            new MoreBulletDamageBuff(),
+            new MoreLifeBuff(),
             new SecondPlayerBuff(playerFactory, engine)
     );
     nerfs.addAll(
