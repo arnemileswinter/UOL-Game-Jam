@@ -15,7 +15,9 @@ public class PlayerBuffer {
 
     public void removeEntity(Entity entity){
         list.remove(entity);
-        counter = (counter)% list.size();
+        int listSize = list.size();
+        if(listSize == 0) return;
+        counter = (counter) % listSize;
     }
 
     public Entity getNextPayer(){

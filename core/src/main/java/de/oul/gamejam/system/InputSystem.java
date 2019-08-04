@@ -65,7 +65,6 @@ public class InputSystem extends IteratingSystem implements InputProcessor {
                     entity = Vplayer;
                 }
                 getEngine().getSystem(CameraFocusPlayerSystem.class).changePlayer(entity);
-
             }
         }
 

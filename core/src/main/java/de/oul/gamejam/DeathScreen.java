@@ -5,19 +5,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.widget.VisLabel;
 
 /** First screen of the application. Displayed after the application is created. */
-public class IntroScreen implements Screen {
+public class DeathScreen implements Screen {
+  private final Scoreboard score;
   private Stage stage;
 
   private Game game;
 
-  public IntroScreen(Game game){this.game = game;}
+  public DeathScreen(Game game, Scoreboard score){
+    this.game = game;
+    this.score = score;
+  }
 
   /**
    * Initialize the game engine and the game world.
@@ -26,23 +28,11 @@ public class IntroScreen implements Screen {
   public void show(){
     stage = new Stage();
     Table table = new Table();
-    table.add(new VisLabel("You are bacteria in a bad person's body."));
+    table.add(new VisLabel("Oh no! The doctors cured the patient!"));
     table.row();
-    table.add(new VisLabel("Doctor's have sent Nanobots into the systems to prevent you to dig deeper."));
+    table.add(new VisLabel("You killed: " + score.getKilledEnemies() + " enemies."));
     table.row();
-    table.add(new VisLabel());
-    table.row();
-    table.add(new VisLabel("Move with WASD."));
-    table.row();
-    table.add(new VisLabel("Shoot by holding ENTER."));
-    table.row();
-    table.add(new VisLabel("TAB to cycle through your companions."));
-    table.row();
-    table.add(new VisLabel());
-    table.row();
-    table.add(new VisLabel("Find your way into the hole, to get deeper in the system!"));
-    table.row();
-    table.add(new VisLabel("Press ENTER to continue."));
+    table.add(new VisLabel("Press ENTER to try again!"));
     table.setFillParent(true);
     stage.addActor(table);
   }

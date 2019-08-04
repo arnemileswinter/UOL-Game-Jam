@@ -67,7 +67,7 @@ public class EngineFactory {
     // player systems
     pooledEngine.addSystem(new CameraFocusPlayerSystem(camera, playerBuffer));
     pooledEngine.addSystem(new InputSystem());
-    pooledEngine.addSystem(new PlayerDeathSystem());
+    pooledEngine.addSystem(new PlayerDeathSystem(game, scoreboard));
 
     // Enemy Systems
     EnemyFactory enemyFactory = new EnemyFactory(pooledEngine, world);
