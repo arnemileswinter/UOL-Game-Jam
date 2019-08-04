@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import de.oul.gamejam.entity.BulletFactory;
-import de.oul.gamejam.entity.PlayerFactory;
-import de.oul.gamejam.entity.PowerupFactory;
-import de.oul.gamejam.entity.PowerupLabelFactory;
+import de.oul.gamejam.entity.*;
 import de.oul.gamejam.powerups.RandomPowerUpEffectProvider;
 import de.oul.gamejam.system.*;
 import de.oul.gamejam.system.physics.AlignPhysicsWithDataSystem;
@@ -60,12 +57,13 @@ public class EngineFactory {
     pooledEngine.addSystem(new InputSystem());
 
     // Enemy Systems
+    EnemyFactory enemyFactory = new EnemyFactory(pooledEngine, world);
     pooledEngine.addSystem(new EnemyDeathSystem(scoreboard));
-    pooledEngine.addSystem(new SpawnSystem(pooledEngine,world));
+    pooledEngine.addSystem(new SpawnSystem(enemyFactory));
     pooledEngine.addSystem(new MoveEnemySystem());
 
     // combat
-    pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world)));
+    pooledEngine.addSystem(new ShootingSystem(new BulletFactory(pooledEngine, world), enemyFactory));
     pooledEngine.addSystem(new BulletHurtSystem());
 
     PowerupFactory powerupFactory = new PowerupFactory(pooledEngine, world, new RandomPowerUpEffectProvider(pooledEngine, playerFactory));

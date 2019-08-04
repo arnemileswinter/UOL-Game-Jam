@@ -5,7 +5,8 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.utils.Array;
 import de.oul.gamejam.entity.PlayerFactory;
 import de.oul.gamejam.powerups.buffs.*;
-import de.oul.gamejam.powerups.nerfs.LessHealthBuff;
+import de.oul.gamejam.powerups.nerfs.LessHealthNerf;
+import de.oul.gamejam.powerups.nerfs.ShootingCreatesEnemiesNerf;
 
 public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
 
@@ -24,7 +25,8 @@ public class RandomPowerUpEffectProvider implements PowerUpEffectProvider{
             new SecondPlayerBuff(playerFactory, engine)
     );
     nerfs.addAll(
-            new LessHealthBuff()
+            new LessHealthNerf(),
+            new ShootingCreatesEnemiesNerf(engine)
     );
   }
 

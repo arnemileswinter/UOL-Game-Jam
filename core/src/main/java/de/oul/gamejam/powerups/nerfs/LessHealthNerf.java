@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import de.oul.gamejam.component.HealthComponent;
 import de.oul.gamejam.powerups.NerfStrategy;
 
-public class LessHealthBuff implements NerfStrategy {
+public class LessHealthNerf implements NerfStrategy {
   ComponentMapper<HealthComponent> healthMapper = ComponentMapper.getFor(HealthComponent.class);
 
   /**
