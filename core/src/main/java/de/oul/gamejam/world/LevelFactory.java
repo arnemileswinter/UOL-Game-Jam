@@ -31,9 +31,7 @@ public class LevelFactory {
         } else {
           leftDoor = rooms[y][x - 1].rightDoor;
         }
-        if (x == 9) {
-          rightDoor = false;
-        }
+
 
         if (y == 9) {
           bottomDoor = false;
@@ -42,9 +40,13 @@ public class LevelFactory {
         }
         if (!bottomDoor && !leftDoor && !rightDoor && !topDoor) {
           topDoor = true;
+          rightDoor = true;
         }
         if (y == 0) {
           topDoor = false;
+        }
+        if (x == 9) {
+          rightDoor = false;
         }
         BasicRoom basicRoom = new BasicRoom(mapTileFactory, x, y, bottomDoor, leftDoor, rightDoor, topDoor);
         if(x==goalX && y == goalY){

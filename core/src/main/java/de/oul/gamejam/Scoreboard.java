@@ -10,4 +10,8 @@ public class Scoreboard {
   public void addKilledEnemies(){
     this.killedEnemies++;
   }
+
+  public void gotGoal(){
+    killedEnemies+= 100;
+  }
 }
