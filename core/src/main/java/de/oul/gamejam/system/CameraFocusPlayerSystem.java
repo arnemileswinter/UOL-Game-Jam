@@ -70,7 +70,9 @@ public class CameraFocusPlayerSystem extends IteratingSystem {
     if (lastPlayerFound) return;
 
     if(lastFocusedPlayer == entity) return;
-    focusedPlayer = entity;
+    if(focusedPlayer == null){
+        focusedPlayer = entity;
+    }
     if(nextPlayer == null) return;
     focusedPlayer = nextPlayer;
     nextPlayer = null;
