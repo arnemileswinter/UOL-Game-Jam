@@ -12,7 +12,7 @@ public class EnemyDeathSystem extends IteratingSystem {
   private final Scoreboard scoreboard;
 
   public EnemyDeathSystem(Scoreboard scoreboard){
-    super(Family.all(EnemyComponent.class, HealthComponent.class).get());
+    super(Family.all(EnemyComponent.class, HealthComponent.class).exclude(ToRemoveComponent.class).get());
     this.scoreboard = scoreboard;
   }
 
