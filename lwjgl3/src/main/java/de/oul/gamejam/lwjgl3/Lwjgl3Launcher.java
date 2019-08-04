@@ -58,7 +58,6 @@ public class Lwjgl3Launcher {
                 }
             });
         });
-        //createApplication();
     }
 
     private static Lwjgl3Application createApplication() {
@@ -70,6 +69,7 @@ public class Lwjgl3Launcher {
         configuration.setTitle("OULGameJam");
         configuration.setWindowedMode(width, height);
         configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
+        configuration.setResizable(false);
         return configuration;
     }
 

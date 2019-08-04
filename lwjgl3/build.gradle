@@ -1,9 +1,18 @@
+plugins {
+	id 'org.openjfx.javafxplugin' version '0.0.6'
+}
+
+javafx {
+	version = "11.0.2"
+	modules = [ 'javafx.controls', 'javafx.swing' ]
+}
+
 apply plugin: 'application'
 
 sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
 mainClassName = 'de.oul.gamejam.lwjgl3.Lwjgl3Launcher'
 eclipse.project.name = appName + '-lwjgl3'
-sourceCompatibility = 1.8
+sourceCompatibility = 1.9
 
 dependencies {
 	api project(':core')
@@ -14,12 +23,13 @@ dependencies {
 	api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
 }
 
+
 import org.gradle.internal.os.OperatingSystem
 
 run {
 	workingDir = rootProject.file('assets').path
 	setIgnoreExitValue(true)
-	
+
 	if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
 		// Required to run LWJGL3 Java apps on MacOS
 		jvmArgs += "-XstartOnFirstThread"
@@ -28,7 +38,7 @@ run {
 jar {
 	archiveFileName = "${appName}-${version}.jar"
 	from files(sourceSets.main.output.classesDirs)
-	from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } } 
+	from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 	manifest {
 		attributes 'Main-Class': project.mainClassName
 	}
